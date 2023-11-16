@@ -1,7 +1,11 @@
+import styles from './page.css'
+
 export const metadata = {
     title: 'Two Player',
   }
 
 export default function Play({searchParams}) {
-    return <h1>Two Player, Gamemode: {searchParams.gamemode}</h1>
+    const gamemode = searchParams.gamemode
+    console.log(gamemode)
+    return <h1 className="title">Two Player</h1>
 }
