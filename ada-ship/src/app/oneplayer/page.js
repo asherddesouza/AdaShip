@@ -1,27 +1,29 @@
-import styles from './page.css'
+import styles from "./page.css";
+import { promises as fs } from "fs";
+import ini from "ini";
 
 export const metadata = {
-    title: 'One Player',
-  }
+  title: "One Player",
+};
 
-export default function Play({searchParams}) {
-    const gamemode = searchParams.gamemode
-    //console.log(gamemode)
+export default async function Play({ searchParams }) {
+  const gamemode = searchParams.gamemode;
+  //console.log(gamemode)
 
-    const fs = require('fs')
+  const file = await fs.readFile(
+    process.cwd() + "/src/app/adaship_config.ini",
+    "utf8"
+  );
+  const data = ini.parse(file);
 
-    fs.readFile('adaship_config.ini', 'utf-8', (err, settings) => {
-      if (err) throw err;
+  return (
+    <div>
+      <h1 className="title">One Player</h1>
+      <p>data</p>
+    </div>
+  );
 
-      console.log(settings)
-    })
-
-
-
-
-    return <h1 className='title'>One Player</h1>
-
-    //create a file parser to take what's in adaship_config to define ship and board sizes
-    //create a grid in HTML/CSS to mirror what is created within the code
-    //create a default array type then create two arrays from that, one target and one shipboard
+  //create a file parser to take what's in adaship_config to define ship and board sizes
+  //create a grid in HTML/CSS to mirror what is created within the code
+  //create a default array type then create two arrays from that, one target and one shipboard
 }
