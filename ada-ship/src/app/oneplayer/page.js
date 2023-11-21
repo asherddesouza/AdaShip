@@ -1,6 +1,6 @@
 import styles from "./page.css";
-import { promises as fs } from "fs";
-import ini from "ini";
+import { promises as fs} from 'fs';
+import { ini } from 'ini';
 
 export const metadata = {
   title: "One Player",
@@ -8,18 +8,16 @@ export const metadata = {
 
 export default async function Play({ searchParams }) {
   const gamemode = searchParams.gamemode;
-  //console.log(gamemode)
 
-  const file = await fs.readFile(
-    process.cwd() + "/src/app/adaship_config.ini",
-    "utf8"
-  );
+  const file = await fs.readFile(process.cwd() + '/src/app/adaship_config.ini', 'utf8');
   const data = ini.parse(file);
+  
+
 
   return (
     <div>
       <h1 className="title">One Player</h1>
-      <p>data</p>
+      <p>{data}</p>
     </div>
   );
 
