@@ -1,3 +1,16 @@
 .title {
-    color: blue
+    font-size: 50px;
+    font-weight: bold;
+    margin: auto;
+    border: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+}
+
+.grid {
+    margin: auto;
+    text-align: center;
+    background-color: #D9D9D9;
+    width: 70%;
 }

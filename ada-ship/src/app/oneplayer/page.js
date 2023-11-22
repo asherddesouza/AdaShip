@@ -45,9 +45,37 @@ export default async function Play({ searchParams }) {
 
   return (
     <div>
+      <div>
+        <p>put navbar here</p>
+      </div>
       <h1 className="title">One Player</h1>
-      <p>The size of the board is: {config.boardSize}</p>
+      <div className="grid">
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+        <p>poo</p>
+      </div>
+      <footer>© Asher De Souza 2023</footer>
     </div>
+    
   );
 
   //create a grid in HTML/CSS to mirror what is created within the code

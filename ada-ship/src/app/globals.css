@@ -1,5 +1,21 @@
-h1 {
+footer {
+  padding: 10px;
   font-weight: bold;
-  color: black;
-  font-size: 42px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #333333;
+  color: white;
+}
+
+ul {
+  padding: 10px;
+  font-weight: bold;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  background-color: #333333;
+  color: white;
 }

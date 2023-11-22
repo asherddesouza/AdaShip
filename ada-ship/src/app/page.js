@@ -80,6 +80,8 @@ export default function Home() {
             Play locally against another person in Salvo mode. [IN PROGRESS]
           </p>
         </Link>
+
+        <footer>© Asher De Souza 2023</footer>
       </div>
     </main>
   )
