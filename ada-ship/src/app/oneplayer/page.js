@@ -6,26 +6,25 @@ export const metadata = {
 };
 
 function parser(file){
-  const newLines = file.split("\n")
+  const newLines = file.split("\n") // get each line
 
-  let board_size = newLines[0].slice(-6)
-  let boat_carrier = newLines[1].slice(-2)
-  let boat_battleship = newLines[2].slice(-2)
-  let boat_destroyer = newLines[3].slice(-2)
-  let boat_submarine = newLines[4].slice(-2)
-  let boat_patrolboat = newLines[5].slice(-1)
+  let board_size = newLines[0].replace(/\D/g, "");
+  let halfBoard = board_size.split("")
+  let gridWidthObj = halfBoard.slice(0, halfBoard.length / 2)
+  let gridHeightObj = halfBoard.slice(halfBoard.length / 2)
+  let grid_width = parseInt(gridWidthObj.join(''))
+  let grid_height = parseInt(gridHeightObj.join('')) // parse the grid's length and width
 
-  //hardcode a search for v1
 
-  // console.log(board_size);
-  // console.log(boat_carrier);
-  // console.log(boat_battleship);
-  // console.log(boat_destroyer);
-  // console.log(boat_submarine);
-  // console.log(boat_patrolboat);
+  let boat_carrier = parseInt(newLines[1].replace(/\D/g, ""));
+  let boat_battleship = parseInt(newLines[2].replace(/\D/g, ""));
+  let boat_destroyer = parseInt(newLines[3].replace(/\D/g, ""));
+  let boat_submarine = parseInt(newLines[4].replace(/\D/g, ""));
+  let boat_patrolboat = parseInt(newLines[5].replace(/\D/g, ""));
 
   const config = {
-    boardSize: board_size,
+    gridWidth: grid_width,
+    gridHeight: grid_height,
     carrierSize: boat_carrier, 
     battleshipSize: boat_battleship,
     destroyerSize: boat_destroyer,
@@ -42,36 +41,16 @@ export default async function Play({ searchParams }) {
   const rawFile = await fs.readFile(process.cwd() + '/src/app/adaship_config.ini', 'utf8'); //read from the adaship config file
   const config = parser(rawFile);
   
+  console.log(config)
+
 
   return (
     <div>
-      <div>
-        <p>put navbar here</p>
-      </div>
       <h1 className="title">One Player</h1>
-      <div className="grid">
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
-        <p>poo</p>
+      <div className="container">
+        <button className="btn continue">Continue</button>
+        <button className="btn reset">Reset</button>
+        <button className="btn quit">Quit</button>
       </div>
       <footer>© Asher De Souza 2023</footer>
     </div>

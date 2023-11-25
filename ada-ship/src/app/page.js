@@ -10,8 +10,10 @@ export default function Home() {
         </h1>
       </div>
 
-      <p>A reimagined take on the classic game of Battleships.</p>
-      <p>Choose from the options below to select your gamemode:</p>
+      <p className='description'>A reimagined take on the classic game of Battleships.</p>
+      <p className='description'>Choose from the options below to select your gamemode:</p>
+      <br></br>
+      <hr></hr>
 
       <div>
         <Link

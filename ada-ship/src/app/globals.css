@@ -9,13 +9,28 @@ footer {
   color: white;
 }
 
-ul {
-  padding: 10px;
-  font-weight: bold;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100%;
-  background-color: #333333;
+body {
+  background-color: rgb(117, 175, 134);
+}
+
+h1 {
+  text-align: center;
   color: white;
+  font-size: 5rem;
+  user-select: none
+}
+
+.description {
+  text-align: center;
+  color: white;
+  user-select: none
+}
+
+hr {
+  width: 600px;
+}
+
+.game-selector {
+  border-color: white 100px;
+  border-style:groove
 }
