@@ -11,11 +11,12 @@ export default function Home() {
       </div>
 
       <p className='description'>A reimagined take on the classic game of Battleships.</p>
-      <p className='description'>Choose from the options below to select your gamemode:</p>
       <br></br>
       <hr></hr>
+      <p className='description'>Gamemodes:</p>
 
       <div>
+      <div className='game-selector'>
         <Link
           href={{
             pathname: "/oneplayer",
@@ -32,7 +33,9 @@ export default function Home() {
             Play against a computer-generated opponent.
           </p>
         </Link>
+      </div>
 
+      <div className='game-selector'>
         <Link
           href={{
             pathname: "/twoplayer",
@@ -49,7 +52,9 @@ export default function Home() {
             Play locally against another person. [IN PROGRESS]
           </p>
         </Link>
+      </div>
 
+      <div className='game-selector'>
         <Link
           href={{
             pathname: "/oneplayer",
@@ -65,7 +70,9 @@ export default function Home() {
             Play against a computer-generated opponent in Salvo mode. [IN PROGRESS]
           </p>
         </Link>
+      </div>
 
+      <div className='game-selector'>
         <Link
           href={{
             pathname: "/twoplayer",
@@ -82,6 +89,7 @@ export default function Home() {
             Play locally against another person in Salvo mode. [IN PROGRESS]
           </p>
         </Link>
+      </div>
 
         <footer>© Asher De Souza 2023</footer>
       </div>

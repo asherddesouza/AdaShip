@@ -57,6 +57,7 @@ export default async function Play({ searchParams }) {
     
   );
 
+  // make it so that the design of the main page is similar to the portfolio page
   //create a grid in HTML/CSS to mirror what is created within the code
   //create a default array type then create two arrays from that, one target and one shipboard
 }
