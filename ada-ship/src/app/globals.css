@@ -34,33 +34,40 @@ h1 {
 hr {
   width: 600px;
   border-style: solid;
-  border-color: #D9D9D9;
+  border-color: #000000;
+}
+
+.white-background {
+  background-color: white;
 }
 
 .game-selector {
-  border-color: white;
-  background-color: rgb(71, 191, 107);;
+  border-color: rgb(0, 0, 0);
+  background-color: #239E81;
   border-style:solid;
   border-width: 5px;
   width: 25%;
+  height: 60%;
   text-align: center;
   border-radius: 25px;
+  margin: auto;
+  margin-top: 10px;
 }
 
-.game-selector:link {
+a:link {
   color: white;
   text-decoration: none;
 }
 
-.game-selector:visited {
+a:visited {
   color: white;
   text-decoration: none;
 }
 
-.game-selector:hover {
+a:hover {
   text-decoration: underline;
 }
 
-.game-selector:active {
+a:active {
   text-decoration: underline;
 }

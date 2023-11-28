@@ -43,11 +43,21 @@ export default async function Play({ searchParams }) {
   
   console.log(config)
 
+  let gameboard = [];
+
+  for (let i = 0; i < config.gridWidth; i++){
+    for (let j = 0; j < config.gridHeight; j++){
+      gameboard.push(i)
+    }
+  }
+
+  console.log(gameboard)
+
 
   return (
     <div>
       <h1 className="title">One Player</h1>
-      <div className="container">
+      <div className="button-container">
         <button className="btn continue">Continue</button>
         <button className="btn reset">Reset</button>
         <button className="btn quit">Quit</button>
@@ -57,7 +67,7 @@ export default async function Play({ searchParams }) {
     
   );
 
-  // make it so that the design of the main page is similar to the portfolio page
+
   //create a grid in HTML/CSS to mirror what is created within the code
   //create a default array type then create two arrays from that, one target and one shipboard
 }

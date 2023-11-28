@@ -4,8 +4,7 @@ export default function Home() {
   return (
     <main>
       <div>
-        <h1
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert">
+        <h1>
           AdaShip
         </h1>
       </div>
@@ -13,7 +12,7 @@ export default function Home() {
       <p className='description'>A reimagined take on the classic game of Battleships.</p>
       <br></br>
       <hr></hr>
-      <p className='description'>Gamemodes:</p>
+      <br></br>
 
       <div>
       <div className='game-selector'>
@@ -49,7 +48,7 @@ export default function Home() {
             </span>
           </h2>
           <p>
-            Play locally against another person. [IN PROGRESS]
+            Play locally against another person.
           </p>
         </Link>
       </div>
@@ -67,7 +66,7 @@ export default function Home() {
             </span>
           </h2>
           <p>
-            Play against a computer-generated opponent in Salvo mode. [IN PROGRESS]
+            Play against a computer-generated opponent in Salvo mode.
           </p>
         </Link>
       </div>
@@ -86,7 +85,7 @@ export default function Home() {
             </span>
           </h2>
           <p>
-            Play locally against another person in Salvo mode. [IN PROGRESS]
+            Play locally against another person in Salvo mode.
           </p>
         </Link>
       </div>
