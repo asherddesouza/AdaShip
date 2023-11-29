@@ -40,23 +40,37 @@ export default async function Play({ searchParams }) {
 
   const rawFile = await fs.readFile(process.cwd() + '/src/app/adaship_config.ini', 'utf8'); //read from the adaship config file
   const config = parser(rawFile);
-  
-  console.log(config)
 
   let gameboard = [];
 
   for (let i = 0; i < config.gridWidth; i++){
+    gameboard.push([])
     for (let j = 0; j < config.gridHeight; j++){
-      gameboard.push(i)
+      gameboard[i].push("")
     }
   }
-
-  console.log(gameboard)
+  console.log("Board: ")
+  console.table(gameboard)
 
 
   return (
     <div>
       <h1 className="title">One Player</h1>
+      <hr></hr>
+
+      <div className="game-window">
+        <div className="square"></div>
+        <div className="square"></div>
+        <div className="square"></div>
+        <div className="square"></div>
+        <div className="square"></div>
+        <div className="square"></div>
+        <div className="square"></div>
+        <div className="square"></div>
+        <div className="square"></div>
+        <div className="square"></div>
+      </div>
+
       <div className="button-container">
         <button className="btn continue">Continue</button>
         <button className="btn reset">Reset</button>
