@@ -1,3 +1,6 @@
+import ContinueButton, { HelpButton, RestartButton } from "../components/buttons/buttons";
+import Grid from "../components/gamegrid/grid";
+import MessageLog from "../components/messagelog/messagelog";
 import styles from "./page.css";
 import { promises as fs} from 'fs';
 
@@ -49,8 +52,15 @@ export default async function Play({ searchParams }) {
       gameboard[i].push("")
     }
   }
-  console.log("Board: ")
-  console.table(gameboard)
+  
+  // console.log("Board: ")
+  // console.table(gameboard)
+
+  //const battleshipGrid = document.getElementById("game-grid")
+
+  function helpModal(){
+    console.log('Help Clicked')
+  }
 
 
   return (
@@ -60,145 +70,15 @@ export default async function Play({ searchParams }) {
       <br></br>
 
       <div className="game-window">
-        <div className="grid">
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-
-          <div className="row">
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-            <div className="cell"></div>
-          </div>
-        </div>
+        <Grid></Grid>
 
         <br></br>
-        <div className="message-log">One Two Three Four Five Six Seven Eight Nine Ten Eleven</div>
+        <MessageLog></MessageLog>
 
         <div className="button-container">
-          <button className="btn continue">Continue</button>
-          <button className="btn reset">Reset</button>
-          <button className="btn quit">Quit</button>
+          <ContinueButton></ContinueButton>
+          <RestartButton></RestartButton>
+          <HelpButton></HelpButton>
         </div>
       </div>
 

@@ -1,0 +1,50 @@
+.btn {
+    font-size: 14px;
+    color: #fff;
+    padding: 10px 30px;
+    border: solid;
+    border-radius: 10px;
+    border-color: black;
+    transition : 294ms;
+    transform: translateY(0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin: 10px;
+
+}
+
+.btn:hover {
+    transition : 294ms;
+    padding: 10px 30px;
+    transform : translateY(-0px);
+    color: #ffffff;
+    border: solid;
+    border-radius: 10px;
+    border-color: black;
+}
+
+.continue {
+    background-color: #239e81;
+}
+
+.continue:hover {
+    background-color: #1f856b;
+}
+
+.restart {
+    background-color: #236f9e;
+}
+
+.restart:hover {
+    background-color: #1a577d;
+}
+
+.help {
+    background-color: #9d9d9d;
+}
+
+.help:hover {
+    background-color: rgb(122, 122, 122);
+}
