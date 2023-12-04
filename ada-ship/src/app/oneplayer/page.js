@@ -57,25 +57,151 @@ export default async function Play({ searchParams }) {
     <div>
       <h1 className="title">One Player</h1>
       <hr></hr>
+      <br></br>
 
       <div className="game-window">
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
+        <div className="grid">
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+
+          <div className="row">
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+            <div className="cell"></div>
+          </div>
+        </div>
+
+        <br></br>
+        <div className="message-log">One Two Three Four Five Six Seven Eight Nine Ten Eleven</div>
+
+        <div className="button-container">
+          <button className="btn continue">Continue</button>
+          <button className="btn reset">Reset</button>
+          <button className="btn quit">Quit</button>
+        </div>
       </div>
 
-      <div className="button-container">
-        <button className="btn continue">Continue</button>
-        <button className="btn reset">Reset</button>
-        <button className="btn quit">Quit</button>
-      </div>
       <footer>© Asher De Souza 2023</footer>
     </div>
     
