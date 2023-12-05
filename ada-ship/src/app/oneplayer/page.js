@@ -44,18 +44,6 @@ export default async function Play({ searchParams }) {
   const rawFile = await fs.readFile(process.cwd() + '/src/app/adaship_config.ini', 'utf8'); //read from the adaship config file
   const config = parser(rawFile);
 
-  let gameboard = [];
-
-  for (let i = 0; i < config.gridWidth; i++){
-    gameboard.push([])
-    for (let j = 0; j < config.gridHeight; j++){
-      gameboard[i].push("")
-    }
-  }
-  
-  // console.log("Board: ")
-  // console.table(gameboard)
-
   //const battleshipGrid = document.getElementById("game-grid")
 
   function helpModal(){
@@ -70,15 +58,23 @@ export default async function Play({ searchParams }) {
       <br></br>
 
       <div className="game-window">
-        <Grid></Grid>
+        <Grid
+          width = {config.gridWidth}
+          height = {config.gridHeight}
+          carrier = {config.carrierSize}
+          battleship = {config.carrierSize}
+          destroyer = {config.destroyerSize}
+          submarine = {config.submarineSize}
+          patrolBoat = {config.patrolBoatSize}
+        />
 
         <br></br>
         <MessageLog></MessageLog>
 
         <div className="button-container">
-          <ContinueButton></ContinueButton>
-          <RestartButton></RestartButton>
-          <HelpButton></HelpButton>
+          <ContinueButton/>
+          <RestartButton/>
+          <HelpButton/>
         </div>
       </div>
 
