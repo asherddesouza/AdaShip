@@ -46,11 +46,6 @@ export default async function Play({ searchParams }) {
 
   //const battleshipGrid = document.getElementById("game-grid")
 
-  function helpModal(){
-    console.log('Help Clicked')
-  }
-
-
   return (
     <div>
       <h1 className="title">One Player</h1>
