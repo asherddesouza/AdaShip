@@ -4,16 +4,18 @@ export default function Home() {
   return (
     <main>
       <div>
-        <h1
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert">
+        <h1>
           AdaShip
         </h1>
       </div>
 
-      <p>A reimagined take on the classic game of Battleships.</p>
-      <p>Choose from the options below to select your gamemode:</p>
+      <p className='description'>A reimagined take on the classic game of Battleships.</p>
+      <br></br>
+      <hr></hr>
+      <br></br>
 
       <div>
+      <div className='game-selector'>
         <Link
           href={{
             pathname: "/oneplayer",
@@ -30,7 +32,9 @@ export default function Home() {
             Play against a computer-generated opponent.
           </p>
         </Link>
+      </div>
 
+      <div className='game-selector'>
         <Link
           href={{
             pathname: "/twoplayer",
@@ -44,10 +48,12 @@ export default function Home() {
             </span>
           </h2>
           <p>
-            Play locally against another person. [IN PROGRESS]
+            Play locally against another person.
           </p>
         </Link>
+      </div>
 
+      <div className='game-selector'>
         <Link
           href={{
             pathname: "/oneplayer",
@@ -60,10 +66,12 @@ export default function Home() {
             </span>
           </h2>
           <p>
-            Play against a computer-generated opponent in Salvo mode. [IN PROGRESS]
+            Play against a computer-generated opponent in Salvo mode.
           </p>
         </Link>
+      </div>
 
+      <div className='game-selector'>
         <Link
           href={{
             pathname: "/twoplayer",
@@ -77,9 +85,12 @@ export default function Home() {
             </span>
           </h2>
           <p>
-            Play locally against another person in Salvo mode. [IN PROGRESS]
+            Play locally against another person in Salvo mode.
           </p>
         </Link>
+      </div>
+
+        <footer>© Asher De Souza 2023</footer>
       </div>
     </main>
   )
