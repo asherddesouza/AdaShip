@@ -1,3 +1,5 @@
+'use client'
+
 import styles from "./buttons.css";
 
 export default function ContinueButton(){
@@ -14,6 +16,24 @@ export function RestartButton(){
 
 export function HelpButton(){
     return (
-        <button className="btn help" id="help-button">Help</button>
+        <button className="btn help" id="help-button">How To Play</button>
+    )
+}
+
+export function ResetBoard(){
+    return (
+        <button className="btn reset" id="reset-button">Reset Board</button>
+    )
+}
+
+export function AutoPlace(){
+    return (
+        <button className="btn autoplace" id="autoplace-button">Auto Place</button>
+    )
+}
+
+export function AutoPlaceAll(){
+    return (
+        <button className="btn autoplaceall" id="autoplaceall-button">Auto Place All</button>
     )
 }

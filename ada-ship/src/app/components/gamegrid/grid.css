@@ -17,6 +17,9 @@
     margin: 3px;
     display: inline-block;
     vertical-align: middle;
+    line-height: 25px;
     text-align: center;
     font-weight: bold;
+    user-select: none;
+    font-size: large;
 }

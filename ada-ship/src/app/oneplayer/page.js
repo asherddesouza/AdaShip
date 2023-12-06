@@ -1,4 +1,4 @@
-import ContinueButton, { HelpButton, RestartButton } from "../components/buttons/buttons";
+import ContinueButton, { AutoPlace, AutoPlaceAll, HelpButton, ResetBoard, RestartButton } from "../components/buttons/buttons";
 import Grid from "../components/gamegrid/grid";
 import MessageLog from "../components/messagelog/messagelog";
 import styles from "./page.css";
@@ -68,9 +68,13 @@ export default async function Play({ searchParams }) {
 
         <div className="button-container">
           <ContinueButton/>
+          <AutoPlace/>
+          <AutoPlaceAll/>
+          <ResetBoard/>
           <RestartButton/>
-          <HelpButton/>
         </div>
+        <br/>
+        <HelpButton/>
       </div>
 
       <footer>© Asher De Souza 2023</footer>

@@ -27,9 +27,14 @@ export default function Grid({ width = 10, height = 10, carrier, battleship, des
     // Do something with the clicked cell, for example, update its content
     // You can access the cell using gameboardLogic[row][column]
     const updatedGameboard = [...gameboardLogic];
-    updatedGameboard[row][column] = 'X'; // Update the content, you can replace 'X' with any value
+    updatedGameboard[row][column] = '❌';
     setGameboardLogic(updatedGameboard);
+    // ❌ 💣
   };
+
+  // create functions that create shipboards for CPU and player
+  // create an autoplace function that can be called during initial generation
+  
 
   return (
     <div className="grid" id="game-grid">
