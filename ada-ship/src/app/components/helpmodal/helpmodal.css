@@ -1,0 +1,56 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    border-width: 5px;
+    border-style: solid;
+    width: 500px;
+    height: 60%;
+    text-align: center;
+    padding: 20px;
+    background-color: #239e81;
+    z-index: 1;
+    font-weight: bold;
+    border-color: black;
+    color: white;
+}
+
+.modal-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #00000088;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-title {
+    font-size: 35px;
+    color: white;
+}
+
+.modalCloseButton {
+    height: 2.5rem;
+    width: 2.5rem;
+    background-color: #ff0000;
+    position: absolute;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 50%;
+    border-color: black;
+    border-width: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    user-select: none;
+    cursor:pointer
+  }
+
+.divider {
+    color: white;
+    width: 70%;
+    border-color: white;
+  }
