@@ -1,6 +1,8 @@
 'use client'
 
+import { Fragment, useState } from "react";
 import styles from "./buttons.css";
+import HelpModal from "../helpmodal/helpmodal";
 
 export default function ContinueButton(){
     return (
@@ -14,10 +16,37 @@ export function RestartButton(){
     )
 }
 
-export function HelpButton(){
+export function HelpButton({carrier = 5, battleship = 4, destroyer = 3, submarine = 3, patrolBoat = 2}) {
+    const [helpModalOpen, setHelpModalOpen] = useState(false);
+
     return (
-        <button className="btn help" id="help-button">How To Play</button>
-    )
+        <>
+            {helpModalOpen ? (
+                <HelpModal
+                    gamemode="One Player" //change this to be dynamic
+                    body_intro="AdaShip is a game where the aim is to sink all of your opponent's battleships by taking it in turns to select a target on the board and firing a torpedo at it."
+                    body_shipdetails="The sizes of the various ships are as follows: "
+                    body_message="Once you have sunk all the opponent's ships, you win!"
+                    carrierSize = {carrier}
+                    battleshipSize = {battleship}
+                    destroyerSize = {destroyer}
+                    submarineSize = {submarine}
+                    patrolBoatSize = {patrolBoat}
+                    onClose={() => {
+                        setHelpModalOpen(false);
+                    }}
+                />
+            ) : null}
+
+            <button
+                className="btn help"
+                id="help-button"
+                onClick={() => setHelpModalOpen(true)}
+            >
+                How To Play
+            </button>
+        </>
+    );
 }
 
 export function ResetBoard(){

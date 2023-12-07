@@ -74,7 +74,13 @@ export default async function Play({ searchParams }) {
           <RestartButton/>
         </div>
         <br/>
-        <HelpButton/>
+        <HelpButton
+          carrier = {config.carrierSize}
+          battleship = {config.carrierSize}
+          destroyer = {config.destroyerSize}
+          submarine = {config.submarineSize}
+          patrolBoat = {config.patrolBoatSize}
+        />
       </div>
 
       <footer>© Asher De Souza 2023</footer>

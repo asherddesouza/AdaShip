@@ -46,6 +46,7 @@
 .help {
     background-color: #9d9d9d;
     margin: auto;
+    cursor: help;
 }
 
 .help:hover {
@@ -58,4 +59,12 @@
 
 .reset:hover {
     background-color: rgb(148, 0, 0);
+}
+
+.autoplace {
+    cursor: copy;
+}
+
+.autoplaceall {
+    cursor: copy;
 }

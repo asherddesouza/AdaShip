@@ -29,7 +29,7 @@ export default function Grid({ width = 10, height = 10, carrier, battleship, des
     const updatedGameboard = [...gameboardLogic];
     updatedGameboard[row][column] = '❌';
     setGameboardLogic(updatedGameboard);
-    // ❌ 💣
+    // ❌ 💣 
   };
 
   // create functions that create shipboards for CPU and player
