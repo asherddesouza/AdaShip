@@ -1,6 +1,6 @@
-.message-log {
+.message-container {
     height: 50px;
-    width: 450px;
+    width: 500px;
     border-style: solid;
     border-radius: 10px;
     border-color: black;
@@ -9,4 +9,5 @@
     font-weight: bold;
     line-height: 50px;
     margin: auto;
+    user-select: none;
 }

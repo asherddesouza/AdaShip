@@ -18,3 +18,23 @@
     width: 50%;
     margin: auto;
 }
+
+.grid-window {
+    display: flex;
+    margin: auto;
+    padding-bottom: 40px;
+}
+
+.player-grid {
+    float: left;
+    padding-right: 100px;
+}
+
+.target-grid {
+    float: right;
+    padding-left: 100px;
+}
+
+.board-title {
+    font-weight: bold;
+}

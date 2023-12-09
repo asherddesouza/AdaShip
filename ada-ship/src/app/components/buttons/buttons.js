@@ -5,14 +5,23 @@ import styles from "./buttons.css";
 import HelpModal from "../helpmodal/helpmodal";
 
 export default function ContinueButton(){
+    const [startButtonText, setStartButtonText] = useState("Start")
+
+    function continueGame() {
+        if (startButtonText === "Start"){
+            setStartButtonText("Continue")
+        }
+        // make another useState hook within the MessageLog so that it changes when you press start
+    }
+
     return (
-        <button className="btn continue" id="continue-button">Continue</button>
+        <button className="btn continue" onClick={continueGame}>{startButtonText}</button>
     )
 }
 
 export function RestartButton(){
     return (
-        <button className="btn restart" id="restart-button">Restart Game</button>
+        <button className="btn restart">Restart Game</button>
     )
 }
 
@@ -40,7 +49,6 @@ export function HelpButton({carrier = 5, battleship = 4, destroyer = 3, submarin
 
             <button
                 className="btn help"
-                id="help-button"
                 onClick={() => setHelpModalOpen(true)}
             >
                 How To Play
@@ -51,18 +59,18 @@ export function HelpButton({carrier = 5, battleship = 4, destroyer = 3, submarin
 
 export function ResetBoard(){
     return (
-        <button className="btn reset" id="reset-button">Reset Board</button>
+        <button className="btn reset">Reset Board</button>
     )
 }
 
 export function AutoPlace(){
     return (
-        <button className="btn autoplace" id="autoplace-button">Auto Place</button>
+        <button className="btn autoplace">Auto Place</button>
     )
 }
 
 export function AutoPlaceAll(){
     return (
-        <button className="btn autoplaceall" id="autoplaceall-button">Auto Place All</button>
+        <button className="btn autoplaceall">Auto Place All</button>
     )
 }

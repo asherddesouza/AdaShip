@@ -1,7 +1,9 @@
 import styles from "./messagelog.css";
 
-export default function MessageLog(){
+export default function MessageLog({message}){
     return (
-        <div className="message-log">One Two Three Four Five Six Seven Eight Nine Ten Eleven</div>
+        <div className="message-container">
+            <div>{message}</div>
+        </div>
     )
 }
