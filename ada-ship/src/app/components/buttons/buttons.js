@@ -4,14 +4,15 @@ import { Fragment, useState } from "react";
 import styles from "./buttons.css";
 import HelpModal from "../helpmodal/helpmodal";
 
-export default function ContinueButton(){
+export default function ContinueButton({onUpdateGameState}){
     const [startButtonText, setStartButtonText] = useState("Start")
 
-    function continueGame() {
+    const continueGame = () => {
         if (startButtonText === "Start"){
             setStartButtonText("Continue")
         }
-        // make another useState hook within the MessageLog so that it changes when you press start
+
+        onUpdateGameState("User Ship Selection")
     }
 
     return (
@@ -19,9 +20,27 @@ export default function ContinueButton(){
     )
 }
 
-export function RestartButton(){
+export function RestartButton({gameState}){
     return (
         <button className="btn restart" onClick={() => window.location.reload(false)}>Restart Game</button>
+    )
+}
+
+export function ResetBoard({gameState}){
+    return (
+        <button className="btn reset">Reset Board</button>
+    )
+}
+
+export function AutoPlace({gameState}){
+    return (
+        <button className="btn autoplace">Auto Place</button>
+    )
+}
+
+export function AutoPlaceAll({gameState}){
+    return (
+        <button className="btn autoplaceall">Auto Place All</button>
     )
 }
 
@@ -55,22 +74,4 @@ export function HelpButton({carrier = 5, battleship = 4, destroyer = 3, submarin
             </button>
         </>
     );
-}
-
-export function ResetBoard(){
-    return (
-        <button className="btn reset">Reset Board</button>
-    )
-}
-
-export function AutoPlace(){
-    return (
-        <button className="btn autoplace">Auto Place</button>
-    )
-}
-
-export function AutoPlaceAll(){
-    return (
-        <button className="btn autoplaceall">Auto Place All</button>
-    )
 }

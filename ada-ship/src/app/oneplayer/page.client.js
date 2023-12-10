@@ -9,6 +9,12 @@ import React, { useState } from 'react';
 
 export default function Play({ searchParams, config }) {
     //const gamemode = searchParams.gamemode;
+
+    const [currentGameState, setCurrentGameState] = useState("Start")
+
+    const updateCurrentGameState = (newState) => {
+      setCurrentGameState(newState);
+    }
   
     return (
       <div>
@@ -48,16 +54,26 @@ export default function Play({ searchParams, config }) {
   
           <br/>
           <MessageLog
-            message={"Press 'Start' to begin the game."}
+            gameState = {currentGameState}
           />
           <br/>
   
           <div className="button-container">
-            <ContinueButton/>
-            <AutoPlace/>
-            <AutoPlaceAll/>
-            <ResetBoard/>
-            <RestartButton/>
+            <ContinueButton
+              onUpdateGameState = {updateCurrentGameState}
+            />
+            <AutoPlace 
+              gameState = {currentGameState}
+            />
+            <AutoPlaceAll 
+              gameState = {currentGameState}
+            />
+            <ResetBoard
+              gameState = {currentGameState}
+            />
+            <RestartButton
+              gameState = {currentGameState}
+            />
             <HelpButton
               carrier = {config.carrierSize}
               battleship = {config.carrierSize}

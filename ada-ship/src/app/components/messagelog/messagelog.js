@@ -1,9 +1,20 @@
 import styles from "./messagelog.css";
+import React, { useState, useEffect } from 'react';
 
-export default function MessageLog({message}){
-    return (
-        <div className="message-container">
-            <div>{message}</div>
-        </div>
-    )
+export default function MessageLog({ gameState }) {
+  const [message, setMessage] = useState("Press 'Start' to begin.");
+
+  useEffect(() => {
+    if (gameState === "User Ship Selection") {
+      setMessage("Select a position on the left board for your Battleship (5)");
+    } else {
+      setMessage("Press 'Start' to begin.");
+    }
+  }, [gameState]);
+
+  return (
+    <div className="message-container">
+      <div>{message}</div>
+    </div>
+  );
 }
