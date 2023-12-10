@@ -6,7 +6,6 @@
     border-radius: 10px;
     border-color: black;
     transition : 294ms;
-    transform: translateY(0);
     display: flex;
     flex-direction: row;
     align-items: center;

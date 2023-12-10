@@ -21,7 +21,7 @@ export default function ContinueButton(){
 
 export function RestartButton(){
     return (
-        <button className="btn restart">Restart Game</button>
+        <button className="btn restart" onClick={() => window.location.reload(false)}>Restart Game</button>
     )
 }
 
