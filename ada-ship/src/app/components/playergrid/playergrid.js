@@ -1,12 +1,13 @@
 'use client'
 
-import { createElement } from "react";
 import styles from "./playergrid.css";
 
 import React, { useEffect, useState } from 'react';
+import ErrorModal from "../errormodal/errormodal";
 
-export default function PlayerGrid({ width = 10, height = 10, carrier, battleship, destroyer, submarine, patrolBoat }) {
+export default function PlayerGrid({ width = 10, height = 10, gameState, carrier, battleship, destroyer, submarine, patrolBoat }) {
   const [gameboardLogic, setGameboardLogic] = useState([]);
+  const [errorModalOpen, setErrorModalOpen] = useState(false)
 
   useEffect(() => {
     const initializeGameboard = () => {
@@ -24,12 +25,16 @@ export default function PlayerGrid({ width = 10, height = 10, carrier, battleshi
   }, [width, height]);
 
   const handleCellClick = (row, column) => {
+    if (gameState === "User Ship Selection"){
     // Do something with the clicked cell, for example, update its content
     // access the cell using gameboardLogic[row][column]
     const updatedGameboard = [...gameboardLogic];
     updatedGameboard[row][column] = '🚢';
     setGameboardLogic(updatedGameboard);
     // ❌ 💣 
+    } else {
+      setErrorModalOpen(true)
+    }
   };
 
 
@@ -54,6 +59,14 @@ export default function PlayerGrid({ width = 10, height = 10, carrier, battleshi
           ))}
         </div>
       ))}
+      {errorModalOpen ? (
+        <ErrorModal
+          errorMessage={"Press Start first lol"}
+          onClose={() => {
+            setErrorModalOpen(false);
+        }}
+        />
+      ) : null}
     </div>
   );
 }

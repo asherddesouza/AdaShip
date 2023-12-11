@@ -29,6 +29,7 @@ export default function Play({ searchParams, config }) {
               <PlayerGrid
                 width = {config.gridWidth}
                 height = {config.gridHeight}
+                gameState = {currentGameState}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}
@@ -42,6 +43,7 @@ export default function Play({ searchParams, config }) {
               <TargetGrid
                 width = {config.gridWidth}
                 height = {config.gridHeight}
+                gameState = {currentGameState}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}
