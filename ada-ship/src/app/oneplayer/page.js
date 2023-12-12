@@ -1,8 +1,6 @@
-import ContinueButton, { AutoPlace, AutoPlaceAll, HelpButton, ResetBoard, RestartButton } from "../components/buttons/buttons";
-import Grid from "../components/gamegrid/grid";
-import MessageLog from "../components/messagelog/messagelog";
 import styles from "./page.css";
 import { promises as fs} from 'fs';
+import Play from "./page.client"
 
 export const metadata = {
   title: "One Player",
@@ -38,57 +36,25 @@ function parser(file){
   return config
 }
 
-export default async function Play({ searchParams }) {
-  //const gamemode = searchParams.gamemode;
-
+export default async function Page() {
   const rawFile = await fs.readFile(process.cwd() + '/src/app/adaship_config.ini', 'utf8'); //read from the adaship config file
   const config = parser(rawFile);
-
-  //const battleshipGrid = document.getElementById("game-grid")
-
   return (
-    <div>
-      <h1 className="title">One Player</h1>
-      <hr></hr>
-      <br></br>
-
-      <div className="game-window">
-        <Grid
-          width = {config.gridWidth}
-          height = {config.gridHeight}
-          carrier = {config.carrierSize}
-          battleship = {config.carrierSize}
-          destroyer = {config.destroyerSize}
-          submarine = {config.submarineSize}
-          patrolBoat = {config.patrolBoatSize}
-        />
-
-        <br></br>
-        <MessageLog></MessageLog>
-
-        <div className="button-container">
-          <ContinueButton/>
-          <AutoPlace/>
-          <AutoPlaceAll/>
-          <ResetBoard/>
-          <RestartButton/>
-        </div>
-        <br/>
-        <HelpButton
-          carrier = {config.carrierSize}
-          battleship = {config.carrierSize}
-          destroyer = {config.destroyerSize}
-          submarine = {config.submarineSize}
-          patrolBoat = {config.patrolBoatSize}
-        />
-      </div>
-
-      <footer>© Asher De Souza 2023</footer>
-    </div>
-    
-  );
-
-
-  //create a grid in HTML/CSS to mirror what is created within the code
-  //create a default array type then create two arrays from that, one target and one shipboard
+    <Play 
+      config={config}
+    />
+  )
 }
+
+
+  // make autoplacing ships work for individual boat types as well as autoplacing all
+  // make a button that lets you start the game again
+  // let the reset board button clear any initial placements
+  // let the continue button further the game
+
+  // create an opponent array and let it use the autoplace function
+
+  // let a user attack somewhere on the board, but it can't be somewhere they've previously attacked
+  // create an autofire function that fires at random valid areas on the board
+
+  //same thing but on the CPU side, use the autofire function for this

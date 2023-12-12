@@ -1,0 +1,37 @@
+.error-container {
+    background-color: rgb(201, 39, 39);
+    border-style: solid;
+    border-width: 5px;
+    border-color: black;
+    margin: auto;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    height: 50px;
+    font-size: 15px;
+    cursor:pointer;
+    border-radius: 20px;
+    line-height: 50px;
+    position:relative;
+}
+
+.close-button {
+    height: 2rem;
+    width: 2rem;
+    background-color: #bbbbbb;
+    position: absolute;
+    top:-15px;
+    right:-15px;
+    color: #000000;
+    font-weight: bold;
+    border-radius: 50%;
+    border-color: black;
+    border-width: 4px;
+    border-style: solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    user-select: none;
+    cursor:pointer;
+  }

@@ -1,11 +1,11 @@
 'use client'
 
 import { createElement } from "react";
-import styles from "./grid.css";
+import styles from "./targetgrid.css";
 
 import React, { useEffect, useState } from 'react';
 
-export default function Grid({ width = 10, height = 10, carrier, battleship, destroyer, submarine, patrolBoat }) {
+export default function TargetGrid({ width = 10, height = 10, gameState, carrier, battleship, destroyer, submarine, patrolBoat }) {
   const [gameboardLogic, setGameboardLogic] = useState([]);
 
   useEffect(() => {
@@ -23,21 +23,25 @@ export default function Grid({ width = 10, height = 10, carrier, battleship, des
     initializeGameboard();
   }, [width, height]);
 
-  const handleCellClick = (row, column) => {
-    // Do something with the clicked cell, for example, update its content
-    // You can access the cell using gameboardLogic[row][column]
-    const updatedGameboard = [...gameboardLogic];
-    updatedGameboard[row][column] = '❌';
-    setGameboardLogic(updatedGameboard);
-    // ❌ 💣 
-  };
+    const handleCellClick = (row, column) => {
+      if (gameState === "User Ship Selection"){
+      // Do something with the clicked cell, for example, update its content
+      // access the cell using gameboardLogic[row][column]
+      const updatedGameboard = [...gameboardLogic];
+      updatedGameboard[row][column] = '❌';
+      setGameboardLogic(updatedGameboard);
+      // ❌ 💣 
+      }
+    };
+
+
 
   // create functions that create shipboards for CPU and player
   // create an autoplace function that can be called during initial generation
   
 
   return (
-    <div className="grid" id="game-grid">
+    <div className="grid">
       {gameboardLogic.map((row, rowIndex) => (
         <div key={rowIndex} className="row">
           {row.map((cell, columnIndex) => (
