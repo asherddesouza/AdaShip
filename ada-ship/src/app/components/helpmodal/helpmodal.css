@@ -12,6 +12,7 @@
     font-weight: bold;
     border-color: black;
     color: white;
+    position: relative;
 }
 
 .modal-container {
@@ -37,11 +38,14 @@
     width: 2.5rem;
     background-color: #ff0000;
     position: absolute;
+    top: -20px;
+    right: -20px;
     color: #ffffff;
     font-weight: bold;
     border-radius: 50%;
     border-color: black;
-    border-width: 10px;
+    border-width: 4px;
+    border-style:solid;
     display: flex;
     justify-content: center;
     align-items: center;

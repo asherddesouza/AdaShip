@@ -4,16 +4,22 @@ import ContinueButton, { AutoPlace, AutoPlaceAll, HelpButton, ResetBoard, Restar
 import PlayerGrid from "../components/playergrid/playergrid";
 import TargetGrid from "../components/targetgrid/targetgrid";
 import MessageLog from "../components/messagelog/messagelog";
-
+import ErrorModal from "../components/errormodal/errormodal";
 import React, { useState } from 'react';
 
 export default function Play({ searchParams, config }) {
     //const gamemode = searchParams.gamemode;
 
     const [currentGameState, setCurrentGameState] = useState("Start")
+    const [errorModalOpen, setErrorModalOpen] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("Generic Error")
 
     const updateCurrentGameState = (newState) => {
       setCurrentGameState(newState);
+    }
+
+    const updateErrorMessage = (newMessage) => {
+      setErrorMessage(newMessage)
     }
   
     return (
@@ -30,6 +36,8 @@ export default function Play({ searchParams, config }) {
                 width = {config.gridWidth}
                 height = {config.gridHeight}
                 gameState = {currentGameState}
+                onUpdateErrorState = {setErrorModalOpen}
+                onSetErrorMessage = {updateErrorMessage}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}
@@ -59,10 +67,20 @@ export default function Play({ searchParams, config }) {
             gameState = {currentGameState}
           />
           <br/>
+
+          {errorModalOpen ? (
+            <ErrorModal
+              errorMessage={errorMessage}
+              onClose={() => {
+                setErrorModalOpen(false);
+              }}
+            />
+          ) : null}
   
           <div className="button-container">
             <ContinueButton
               onUpdateGameState = {updateCurrentGameState}
+              onUpdateErrorState = {setErrorModalOpen}
             />
             <AutoPlace 
               gameState = {currentGameState}

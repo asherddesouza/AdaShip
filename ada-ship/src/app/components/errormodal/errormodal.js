@@ -34,8 +34,8 @@ const ErrorModal = ({errorMessage, onClose}) => {
             onClose();
         }}
         >
+            <div className="close-button">X</div>
             <div>{errorMessage}</div>
-            <div>Tap to dismiss.</div>
         </div>
     )
 }

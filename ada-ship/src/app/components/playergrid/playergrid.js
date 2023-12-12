@@ -5,9 +5,19 @@ import styles from "./playergrid.css";
 import React, { useEffect, useState } from 'react';
 import ErrorModal from "../errormodal/errormodal";
 
-export default function PlayerGrid({ width = 10, height = 10, gameState, carrier, battleship, destroyer, submarine, patrolBoat }) {
+export default function PlayerGrid({ 
+  width = 10, 
+  height = 10, 
+  gameState, 
+  onUpdateErrorState, 
+  onSetErrorMessage, 
+  carrier, 
+  battleship, 
+  destroyer, 
+  submarine, 
+  patrolBoat }) {
+  
   const [gameboardLogic, setGameboardLogic] = useState([]);
-  const [errorModalOpen, setErrorModalOpen] = useState(false)
 
   useEffect(() => {
     const initializeGameboard = () => {
@@ -33,7 +43,8 @@ export default function PlayerGrid({ width = 10, height = 10, gameState, carrier
     setGameboardLogic(updatedGameboard);
     // ❌ 💣 
     } else {
-      setErrorModalOpen(true)
+      onUpdateErrorState(true)
+      onSetErrorMessage("Press Start before trying to place your ships")
     }
   };
 
@@ -59,14 +70,6 @@ export default function PlayerGrid({ width = 10, height = 10, gameState, carrier
           ))}
         </div>
       ))}
-      {errorModalOpen ? (
-        <ErrorModal
-          errorMessage={"Press Start first lol"}
-          onClose={() => {
-            setErrorModalOpen(false);
-        }}
-        />
-      ) : null}
     </div>
   );
 }

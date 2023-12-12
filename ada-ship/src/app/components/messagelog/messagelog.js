@@ -6,7 +6,7 @@ export default function MessageLog({ gameState }) {
 
   useEffect(() => {
     if (gameState === "User Ship Selection") {
-      setMessage("Select a position on the left board for your Battleship (5)");
+      setMessage("Select a position on the left board for your Battleship (5 cells), cells must be arranged in rows or columns");
     } else {
       setMessage("Press 'Start' to begin.");
     }

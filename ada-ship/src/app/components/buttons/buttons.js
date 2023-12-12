@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import styles from "./buttons.css";
 import HelpModal from "../helpmodal/helpmodal";
 
-export default function ContinueButton({onUpdateGameState}){
+export default function ContinueButton({onUpdateGameState, onUpdateErrorState}){
     const [startButtonText, setStartButtonText] = useState("Start")
 
     const continueGame = () => {
@@ -13,6 +13,7 @@ export default function ContinueButton({onUpdateGameState}){
         }
 
         onUpdateGameState("User Ship Selection")
+        onUpdateErrorState(false)
     }
 
     return (
