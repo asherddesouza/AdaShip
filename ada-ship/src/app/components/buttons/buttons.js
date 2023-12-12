@@ -12,7 +12,7 @@ export default function ContinueButton({onUpdateGameState, onUpdateErrorState}){
             setStartButtonText("Continue")
         }
 
-        onUpdateGameState("User Ship Selection")
+        onUpdateGameState("User Carrier Selection")
         onUpdateErrorState(false)
     }
 
@@ -27,9 +27,16 @@ export function RestartButton({gameState}){
     )
 }
 
-export function ResetBoard({gameState}){
+export function ResetBoard({gameState, onUpdateGameState, onSetClearBoard}){
+    const resetCells = () => {
+        if (true) { //when attacks have been implemented, restrict this
+            onUpdateGameState("User Carrier Selection")
+            onSetClearBoard(true)
+        }
+    }
+
     return (
-        <button className="btn reset">Reset Board</button>
+        <button className="btn reset" onClick={resetCells}>Reset Board</button>
     )
 }
 

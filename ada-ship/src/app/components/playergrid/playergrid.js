@@ -10,7 +10,8 @@ export default function PlayerGrid({
   height = 10, 
   gameState, 
   onUpdateErrorState, 
-  onSetErrorMessage, 
+  onSetErrorMessage,
+  clearBoardStatus,
   carrier, 
   battleship, 
   destroyer, 
@@ -20,7 +21,11 @@ export default function PlayerGrid({
   const [gameboardLogic, setGameboardLogic] = useState([]);
 
   useEffect(() => {
-    const initializeGameboard = () => {
+    if (gameState === "Start" || clearBoardStatus){
+      // try to get this working
+    }
+    
+    const initialiseGameboard = () => {
       const initialGameboard = [];
 
       for (let i = 0; i < width; i++) {
@@ -31,18 +36,21 @@ export default function PlayerGrid({
       setGameboardLogic(initialGameboard);
     };
 
-    initializeGameboard();
+    initialiseGameboard();
   }, [width, height]);
 
   const handleCellClick = (row, column) => {
-    if (gameState === "User Ship Selection"){
+    if (gameState === "User Carrier Selection"){
     // Do something with the clicked cell, for example, update its content
     // access the cell using gameboardLogic[row][column]
     const updatedGameboard = [...gameboardLogic];
-    updatedGameboard[row][column] = '🚢';
+    updatedGameboard[row][column] = 'C';
     setGameboardLogic(updatedGameboard);
-    // ❌ 💣 
-    } else {
+    } else if (gameState === "FOO BAR"){
+      pass
+    }
+    
+    else if (gameState === "Start"){
       onUpdateErrorState(true)
       onSetErrorMessage("Press Start before trying to place your ships")
     }

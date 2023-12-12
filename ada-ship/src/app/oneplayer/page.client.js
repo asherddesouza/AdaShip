@@ -13,6 +13,7 @@ export default function Play({ searchParams, config }) {
     const [currentGameState, setCurrentGameState] = useState("Start")
     const [errorModalOpen, setErrorModalOpen] = useState(false)
     const [errorMessage, setErrorMessage] = useState("Generic Error")
+    const [clearBoard, setClearBoard] = useState(false)
 
     const updateCurrentGameState = (newState) => {
       setCurrentGameState(newState);
@@ -20,6 +21,10 @@ export default function Play({ searchParams, config }) {
 
     const updateErrorMessage = (newMessage) => {
       setErrorMessage(newMessage)
+    }
+
+    const updateClearBoard = (decision) => {
+      setClearBoard(decision)
     }
   
     return (
@@ -38,6 +43,7 @@ export default function Play({ searchParams, config }) {
                 gameState = {currentGameState}
                 onUpdateErrorState = {setErrorModalOpen}
                 onSetErrorMessage = {updateErrorMessage}
+                clearBoardStatus = {clearBoard}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}
@@ -90,6 +96,8 @@ export default function Play({ searchParams, config }) {
             />
             <ResetBoard
               gameState = {currentGameState}
+              onUpdateGameState = {updateCurrentGameState}
+              onSetClearBoard = {updateClearBoard}
             />
             <RestartButton
               gameState = {currentGameState}
