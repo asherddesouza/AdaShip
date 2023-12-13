@@ -11,7 +11,7 @@ export default function PlayerGrid({
   gameState, 
   onUpdateErrorState, 
   onSetErrorMessage,
-  clearBoardStatus,
+  clearBoardStatus = false,
   carrier, 
   battleship, 
   destroyer, 
@@ -21,23 +21,38 @@ export default function PlayerGrid({
   const [gameboardLogic, setGameboardLogic] = useState([]);
 
   useEffect(() => {
-    if (gameState === "Start" || clearBoardStatus){
-      // try to get this working
-    }
-    
-    const initialiseGameboard = () => {
-      const initialGameboard = [];
-
-      for (let i = 0; i < width; i++) {
-        const row = Array.from({ length: height }, () => '');
-        initialGameboard.push(row);
-      }
-
-      setGameboardLogic(initialGameboard);
-    };
-
-    initialiseGameboard();
+      const initialiseGameboard = () => {
+        const initialGameboard = [];
+  
+        for (let i = 0; i < width; i++) {
+          const row = Array.from({ length: height }, () => '');
+          initialGameboard.push(row);
+        }
+  
+        setGameboardLogic(initialGameboard);
+      };
+  
+      initialiseGameboard();
   }, [width, height]);
+
+  useEffect(() => {
+    const clearBoard = () => {
+      if (clearBoardStatus && gameState === "User Carrier Selection"){
+        const updatedGameboard = [...gameboardLogic];
+
+        for (let i = 0; i < width; i++){
+          for (let j = 0; j < height; j++){
+            updatedGameboard[i][j] = ' ';
+          }
+        }
+
+        setGameboardLogic(updatedGameboard);
+
+      }
+    }
+
+    clearBoard();
+  }, [clearBoardStatus])
 
   const handleCellClick = (row, column) => {
     if (gameState === "User Carrier Selection"){
@@ -46,7 +61,9 @@ export default function PlayerGrid({
     const updatedGameboard = [...gameboardLogic];
     updatedGameboard[row][column] = 'C';
     setGameboardLogic(updatedGameboard);
-    } else if (gameState === "FOO BAR"){
+    } 
+    
+    else if (gameState === "FOO BAR"){
       pass
     }
     

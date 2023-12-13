@@ -32,6 +32,7 @@ export function ResetBoard({gameState, onUpdateGameState, onSetClearBoard}){
         if (true) { //when attacks have been implemented, restrict this
             onUpdateGameState("User Carrier Selection")
             onSetClearBoard(true)
+            console.log('truiwe')
         }
     }
 
