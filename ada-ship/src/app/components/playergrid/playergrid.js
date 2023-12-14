@@ -45,32 +45,58 @@ export default function PlayerGrid({
             updatedGameboard[i][j] = ' ';
           }
         }
-
         setGameboardLogic(updatedGameboard);
-
       }
     }
 
     clearBoard();
-  }, [clearBoardStatus])
+  }, [clearBoardStatus]);
+
+  useEffect(() => {
+    const checkShipValidPlacement = () => {
+      //if the Cs are placed in a perfect row/column, then move on
+      // otherwise, throw an error
+
+      if (gameState === "User Ship Selection Validation"){
+        console.log("cheese")
+        // need to implement this ^^ when continue is clicked
+      }
+    }
+
+    checkShipValidPlacement()
+  }, [gameState])
 
   const handleCellClick = (row, column) => {
+    const updatedGameboard = [...gameboardLogic];
+
     if (gameState === "User Carrier Selection"){
     // Do something with the clicked cell, for example, update its content
     // access the cell using gameboardLogic[row][column]
-    const updatedGameboard = [...gameboardLogic];
     updatedGameboard[row][column] = 'C';
-    setGameboardLogic(updatedGameboard);
-    } 
+} 
     
-    else if (gameState === "FOO BAR"){
-      pass
+    else if (gameState === "User Battleship Selection"){
+      updatedGameboard[row][column] = 'B';
+    }
+
+    else if (gameState === "User Destroyer Selection"){
+      updatedGameboard[row][column] = 'D';
+    }
+
+    else if (gameState === "User Submarine Selection"){
+      updatedGameboard[row][column] = 'S';
+    }
+
+    else if (gameState === "User Patrol Boat Selection"){
+      updatedGameboard[row][column] = 'P';
     }
     
     else if (gameState === "Start"){
       onUpdateErrorState(true)
       onSetErrorMessage("Press Start before trying to place your ships")
     }
+
+    setGameboardLogic(updatedGameboard);
   };
 
 

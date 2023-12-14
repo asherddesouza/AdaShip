@@ -71,6 +71,11 @@ export default function Play({ searchParams, config }) {
           <br/>
           <MessageLog
             gameState = {currentGameState}
+            carrier = {config.carrierSize}
+            battleship = {config.carrierSize}
+            destroyer = {config.destroyerSize}
+            submarine = {config.submarineSize}
+            patrolBoat = {config.patrolBoatSize}
           />
           <br/>
 
@@ -85,6 +90,7 @@ export default function Play({ searchParams, config }) {
   
           <div className="button-container">
             <ContinueButton
+              gameState={ currentGameState }
               onUpdateGameState = {updateCurrentGameState}
               onUpdateErrorState = {setErrorModalOpen}
             />

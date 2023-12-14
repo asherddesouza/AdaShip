@@ -4,16 +4,43 @@ import { Fragment, useState } from "react";
 import styles from "./buttons.css";
 import HelpModal from "../helpmodal/helpmodal";
 
-export default function ContinueButton({onUpdateGameState, onUpdateErrorState}){
+export default function ContinueButton({ gameState, onUpdateGameState, onUpdateErrorState}){
     const [startButtonText, setStartButtonText] = useState("Start")
 
     const continueGame = () => {
         if (startButtonText === "Start"){
-            setStartButtonText("Continue")
+            setStartButtonText("Confirm Selection")
+            onUpdateGameState("User Carrier Selection")
+            onUpdateErrorState(false)
         }
 
-        onUpdateGameState("User Carrier Selection")
-        onUpdateErrorState(false)
+        else if (gameState === "User Carrier Selection"){
+            onUpdateGameState("User Battleship Selection")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "User Battleship Selection"){
+            onUpdateGameState("User Destroyer Selection")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "User Destroyer Selection"){
+            onUpdateGameState("User Submarine Selection")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "User Submarine Selection"){
+            setStartButtonText("Validate")
+            onUpdateGameState("User Patrol Boat Selection")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "User Patrol Boat Selection"){
+            setStartButtonText("Continue")
+            onUpdateGameState("User Ship Selection Validation")
+            onUpdateErrorState(false)
+        }
+
     }
 
     return (
@@ -32,7 +59,6 @@ export function ResetBoard({gameState, onUpdateGameState, onSetClearBoard}){
         if (true) { //when attacks have been implemented, restrict this
             onUpdateGameState("User Carrier Selection")
             onSetClearBoard(true)
-            console.log('truiwe')
         }
     }
 
