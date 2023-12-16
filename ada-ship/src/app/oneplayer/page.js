@@ -48,9 +48,6 @@ export default async function Page() {
 
 
   // make autoplacing ships work for individual boat types as well as autoplacing all
-  // make a button that lets you start the game again
-  // let the reset board button clear any initial placements
-  // let the continue button further the game
 
   // create an opponent array and let it use the autoplace function
 

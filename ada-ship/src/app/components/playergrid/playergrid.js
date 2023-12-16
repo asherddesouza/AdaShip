@@ -8,7 +8,8 @@ import ErrorModal from "../errormodal/errormodal";
 export default function PlayerGrid({ 
   width = 10, 
   height = 10, 
-  gameState, 
+  gameState,
+  onUpdateGameState,
   onUpdateErrorState, 
   onSetErrorMessage,
   clearBoardStatus = false,
@@ -54,12 +55,118 @@ export default function PlayerGrid({
 
   useEffect(() => {
     const checkShipValidPlacement = () => {
-      //if the Cs are placed in a perfect row/column, then move on
+      //if the ships are placed in a perfect row/column, then move on
       // otherwise, throw an error
 
+      const checkShipCorrectDirection = (shipType, shipLength) => {
+        let firstOccurrenceRow, firstOccurrenceColumn // looks at bottom right instead of top left
+
+        for (let i = 0; i < width; i++){
+          for (let j = 0; j < height; j++){
+            if (gameboardLogic[i][j] == shipType){
+              [firstOccurrenceRow, firstOccurrenceColumn] = [i, j]
+            }
+          }
+        }
+
+        let horizontalCheck = true;
+        let verticalCheck = true;
+
+        //horizontal check
+        for (let i = 0; i < shipLength; i++) {
+          if (
+            firstOccurrenceColumn - i < 0 ||
+            firstOccurrenceColumn - i >= width ||
+            gameboardLogic[firstOccurrenceRow][firstOccurrenceColumn - i] !== shipType
+          ) {
+            horizontalCheck = false;
+            break;
+          }
+        }
+
+        if (horizontalCheck){return horizontalCheck}
+
+        //vertical check
+        for (let i = 0; i < shipLength; i++) {
+          if (
+            firstOccurrenceRow - i < 0 ||
+            firstOccurrenceRow - i >= height ||
+            gameboardLogic[firstOccurrenceRow - i][firstOccurrenceColumn] !== shipType
+          ) {
+            verticalCheck = false;
+            break;
+          }
+        }
+
+        //final return
+        if (verticalCheck){
+          return verticalCheck
+        } else return false
+      }
+
       if (gameState === "User Ship Selection Validation"){
-        console.log("cheese")
-        // need to implement this ^^ when continue is clicked
+        let carrierCount = 0
+        let battleshipCount = 0
+        let destroyerCount = 0
+        let submarineCount = 0
+        let patrolboatCount = 0
+
+        for (let i = 0; i < width; i++){
+          for (let j = 0; j < height; j++){
+            if (gameboardLogic[i][j] == 'C'){
+              carrierCount++
+            } else if (gameboardLogic[i][j] == 'B'){
+              battleshipCount++
+            } else if (gameboardLogic[i][j] == 'D'){
+              destroyerCount++
+            } else if (gameboardLogic[i][j] == 'S'){
+              submarineCount++
+            } else if (gameboardLogic[i][j] == 'P'){
+              patrolboatCount++
+            }
+          }
+        }
+        
+        if (1 == 2){
+          onUpdateGameState("test")// change this once all errors 
+        } else if (carrierCount != carrier){
+          onUpdateGameState("Invalid Ship Placement")
+          onUpdateErrorState(true)
+          onSetErrorMessage(`Invalid number of Carriers placed (${carrierCount}), you can only place ${carrier} (click to restart)`)
+        } else if (battleshipCount != battleship){
+          onUpdateGameState("Invalid Ship Placement")
+          onUpdateErrorState(true)
+          onSetErrorMessage(`Invalid number of Battleships placed (${battleshipCount}), you can only place ${battleship} (click to restart)`)
+        } else if (destroyerCount != destroyer){
+          onUpdateGameState("Invalid Ship Placement")
+          onUpdateErrorState(true)
+          onSetErrorMessage(`Invalid number of Destroyers placed (${destroyerCount}), you can only place ${destroyer} (click to restart)`)
+        } else if (submarineCount != submarine){
+          onUpdateGameState("Invalid Ship Placement")
+          onUpdateErrorState(true)
+          onSetErrorMessage(`Invalid number of Submarines placed (${submarineCount}), you can only place ${submarine} (click to restart)`)
+        } else if (patrolboatCount != patrolBoat){
+          onUpdateGameState("Invalid Ship Placement")
+          onUpdateErrorState(true)
+          onSetErrorMessage(`Invalid number of Patrol Boats placed (${patrolboatCount}), you can only place ${patrolBoat} (click to restart)`)
+        }
+        
+        
+        else if (carrierCount == carrier){
+            if (
+              checkShipCorrectDirection("C", carrier) &&
+              checkShipCorrectDirection("B", battleship) &&
+              checkShipCorrectDirection("D", destroyer) &&
+              checkShipCorrectDirection("S", submarine) &&
+              checkShipCorrectDirection("P", patrolBoat)
+            ){
+              onUpdateGameState("Ready for Attack")
+            } else {
+              onUpdateGameState("Invalid Ship Placement")
+              onUpdateErrorState(true)
+              onSetErrorMessage("Some of your ships had invalid placements, try again. (click to restart)")
+            }
+        }
       }
     }
 
