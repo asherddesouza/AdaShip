@@ -33,6 +33,9 @@ const MessageLog = ({
     else if (gameState === "User Ship Selection Validation"){
         setMessage("Validating Ship Placement...")
     }
+    else if (gameState === "Validated User Ship Selection"){
+        setMessage("Ship Placements Validated - press Continue")
+    }
 
     else {
       null

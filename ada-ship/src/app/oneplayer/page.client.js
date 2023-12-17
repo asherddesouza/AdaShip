@@ -14,6 +14,7 @@ export default function Play({ searchParams, config }) {
     const [errorModalOpen, setErrorModalOpen] = useState(false)
     const [errorMessage, setErrorMessage] = useState("Generic Error")
     const [clearBoard, setClearBoard] = useState(false)
+    const [autoPlaceType, setAutoPlaceType] = useState(String)
 
     const updateCurrentGameState = (newState) => {
       setCurrentGameState(newState);
@@ -25,6 +26,10 @@ export default function Play({ searchParams, config }) {
 
     const updateClearBoard = (decision) => {
       setClearBoard(decision)
+    }
+
+    const updateAutoPlaceType = (type) => {
+      setAutoPlaceType(type)
     }
   
     return (
@@ -45,6 +50,9 @@ export default function Play({ searchParams, config }) {
                 onUpdateErrorState = {setErrorModalOpen}
                 onSetErrorMessage = {updateErrorMessage}
                 clearBoardStatus = {clearBoard}
+                onSetClearBoard = {updateClearBoard}
+                autoPlace = {autoPlaceType}
+                onSetAutoPlace = {updateAutoPlaceType}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}
@@ -98,6 +106,8 @@ export default function Play({ searchParams, config }) {
             />
             <AutoPlace 
               gameState = {currentGameState}
+              autoPlace = {autoPlaceType}
+              onSetAutoPlace = {updateAutoPlaceType}
             />
             <AutoPlaceAll 
               gameState = {currentGameState}

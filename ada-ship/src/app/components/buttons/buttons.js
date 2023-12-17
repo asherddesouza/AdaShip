@@ -41,6 +41,10 @@ export default function ContinueButton({ gameState, onUpdateGameState, onUpdateE
             onUpdateErrorState(false)
         }
 
+        else if (gameState === "Validated User Ship Selection"){
+            setStartButtonText("Validated User Ship Selection")
+        }
+
     }
 
     return (
@@ -56,7 +60,13 @@ export function RestartButton({gameState}){
 
 export function ResetBoard({gameState, onUpdateGameState, onSetClearBoard}){
     const resetCells = () => {
-        if (true) { //when attacks have been implemented, restrict this
+        if (
+            gameState == "User Carrier Selection" ||
+            gameState == "User Battleship Selection" ||
+            gameState == "User Destroyer Selection" ||
+            gameState == "User Submarine Selection" ||
+            gameState == "User Patrol Boat Selection"
+            ) {
             onUpdateGameState("User Carrier Selection")
             onSetClearBoard(true)
         }
@@ -67,13 +77,32 @@ export function ResetBoard({gameState, onUpdateGameState, onSetClearBoard}){
     )
 }
 
-export function AutoPlace({gameState}){
+export function AutoPlace({ gameState, autoPlace, onSetAutoPlace }){
+
+    const triggerAutoPlace = () => {
+        if (gameState == "User Carrier Selection") {
+            onSetAutoPlace("Carrier")
+        } else if (gameState == "User Battleship Selection"){
+            onSetAutoPlace("Battleship")
+        } else if (gameState == "User Destroyer Selection"){
+            onSetAutoPlace("Destroyer")
+        } else if (gameState == "User Submarine Selection"){
+            onSetAutoPlace("Submarine")
+        } else if (gameState == "User Patrol Boat Selection"){
+            onSetAutoPlace("Patrol Boat")
+        }
+    }
+    
+
+
     return (
-        <button className="btn autoplace">Auto Place</button>
+        <button className="btn autoplace" onClick={triggerAutoPlace}>Auto Place</button>
     )
 }
 
 export function AutoPlaceAll({gameState}){
+    //verify game state and then send back an 'all' response to onSetAutoPlace
+
     return (
         <button className="btn autoplaceall">Auto Place All</button>
     )

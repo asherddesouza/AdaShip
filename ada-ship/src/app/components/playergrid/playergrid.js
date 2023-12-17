@@ -13,6 +13,9 @@ export default function PlayerGrid({
   onUpdateErrorState, 
   onSetErrorMessage,
   clearBoardStatus = false,
+  onSetClearBoard,
+  autoPlace,
+  onSetAutoPlace,
   carrier, 
   battleship, 
   destroyer, 
@@ -48,6 +51,8 @@ export default function PlayerGrid({
         }
         setGameboardLogic(updatedGameboard);
       }
+
+      onSetClearBoard(false)
     }
 
     clearBoard();
@@ -127,9 +132,7 @@ export default function PlayerGrid({
           }
         }
         
-        if (1 == 2){
-          onUpdateGameState("test")// change this once all errors 
-        } else if (carrierCount != carrier){
+        if (carrierCount != carrier){
           onUpdateGameState("Invalid Ship Placement")
           onUpdateErrorState(true)
           onSetErrorMessage(`Invalid number of Carriers placed (${carrierCount}), you can only place ${carrier} (click to restart)`)
@@ -149,10 +152,7 @@ export default function PlayerGrid({
           onUpdateGameState("Invalid Ship Placement")
           onUpdateErrorState(true)
           onSetErrorMessage(`Invalid number of Patrol Boats placed (${patrolboatCount}), you can only place ${patrolBoat} (click to restart)`)
-        }
-        
-        
-        else if (carrierCount == carrier){
+        } else if (carrierCount == carrier){
             if (
               checkShipCorrectDirection("C", carrier) &&
               checkShipCorrectDirection("B", battleship) &&
@@ -160,7 +160,7 @@ export default function PlayerGrid({
               checkShipCorrectDirection("S", submarine) &&
               checkShipCorrectDirection("P", patrolBoat)
             ){
-              onUpdateGameState("Ready for Attack")
+              onUpdateGameState("Validated User Ship Selection")
             } else {
               onUpdateGameState("Invalid Ship Placement")
               onUpdateErrorState(true)
@@ -173,6 +173,37 @@ export default function PlayerGrid({
     checkShipValidPlacement()
   }, [gameState])
 
+  useEffect(() => {
+  const autoPlaceShips = () => {
+    const getIndexWithinRange = (max) => {
+      return Math.floor(Math.random() * (max))
+    }
+
+    setGameboardLogic((currentGameboard) => {
+      const updatedGameboard = [...currentGameboard];
+
+      if (autoPlace === "Carrier") {
+        const carrierColumnBound = getIndexWithinRange(carrier)
+
+        let count = 0
+
+        for (let i = 0; i < carrier; i++) {
+          updatedGameboard[0][carrierColumnBound + i] = 'C';
+          count++
+        }
+
+        onUpdateErrorState(true)
+        onSetErrorMessage(`columnBound: ${carrierColumnBound} // i: ${count} // columnBound + i: ${carrierColumnBound + count}`)
+      }
+
+
+      return updatedGameboard;
+    });
+  };
+
+  autoPlaceShips();
+}, [autoPlace]);
+
   const handleCellClick = (row, column) => {
     const updatedGameboard = [...gameboardLogic];
 
@@ -180,7 +211,7 @@ export default function PlayerGrid({
     // Do something with the clicked cell, for example, update its content
     // access the cell using gameboardLogic[row][column]
     updatedGameboard[row][column] = 'C';
-} 
+    } 
     
     else if (gameState === "User Battleship Selection"){
       updatedGameboard[row][column] = 'B';
