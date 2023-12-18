@@ -175,27 +175,38 @@ export default function PlayerGrid({
 
   useEffect(() => {
   const autoPlaceShips = () => {
-    const getIndexWithinRange = (max) => {
-      return Math.floor(Math.random() * (max))
-    }
-
     setGameboardLogic((currentGameboard) => {
       const updatedGameboard = [...currentGameboard];
 
       if (autoPlace === "Carrier") {
-        const carrierColumnBound = getIndexWithinRange(carrier)
-
-        let count = 0
-
         for (let i = 0; i < carrier; i++) {
-          updatedGameboard[0][carrierColumnBound + i] = 'C';
-          count++
+          updatedGameboard[0][i + 2] = 'C';
         }
-
-        onUpdateErrorState(true)
-        onSetErrorMessage(`columnBound: ${carrierColumnBound} // i: ${count} // columnBound + i: ${carrierColumnBound + count}`)
       }
 
+      if (autoPlace === "Battleship") {
+        for (let i = 0; i < battleship; i++) {
+          updatedGameboard[i + 3][5] = 'B';
+        }
+      }
+
+      if (autoPlace === "Destroyer") {
+        for (let i = 0; i < destroyer; i++) {
+          updatedGameboard[9][i] = 'D';
+        }
+      }
+
+      if (autoPlace === "Submarine") {
+        for (let i = 0; i < submarine; i++) {
+          updatedGameboard[i + 5][7] = 'S';
+        }
+      }
+
+      if (autoPlace === "Patrol Boat") {
+        for (let i = 0; i < patrolBoat; i++) {
+          updatedGameboard[5][i + 2] = 'P';
+        }
+      }
 
       return updatedGameboard;
     });
@@ -203,6 +214,45 @@ export default function PlayerGrid({
 
   autoPlaceShips();
 }, [autoPlace]);
+
+useEffect(() => {
+  const autoPlaceAllShips = () => {
+    setGameboardLogic((currentGameboard) => {
+      const updatedGameboard = [...currentGameboard];
+
+      if (autoPlace == "Autoplace All"){
+        for (let i = 0; i < carrier; i++) {
+          updatedGameboard[0][i + 5] = 'C';
+        }
+
+        for (let i = 0; i < battleship; i++) {
+          updatedGameboard[i + 3][2] = 'B';
+        }
+
+        for (let i = 0; i < destroyer; i++) {
+          updatedGameboard[9][i + 5] = 'D';
+        }
+
+        for (let i = 0; i < submarine; i++) {
+          updatedGameboard[i + 3][7] = 'S';
+        }
+
+        for (let i = 0; i < patrolBoat; i++) {
+          updatedGameboard[5][i + 4] = 'P';
+        }
+
+        onUpdateGameState("User Patrol Boat Selection")
+      }
+      
+
+      return updatedGameboard;
+    });
+  };
+
+  autoPlaceAllShips();
+}, [autoPlace]);
+
+
 
   const handleCellClick = (row, column) => {
     const updatedGameboard = [...gameboardLogic];
