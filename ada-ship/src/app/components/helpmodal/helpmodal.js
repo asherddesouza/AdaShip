@@ -47,11 +47,11 @@ const HelpModal = ({
                 <hr className="divider"/>
                 <p>{body_intro}</p>
                 <p>{body_shipdetails}</p>
-                <p>Carrier: {carrierSize}</p>
-                <p>Battleship: {battleshipSize}</p>
-                <p>Destroyer: {destroyerSize}</p>
-                <p>Submarine: {submarineSize}</p>
-                <p>Patrol Boat: {patrolBoatSize}</p>
+                <p>(C) Carrier: {carrierSize}</p>
+                <p>(B) Battleship: {battleshipSize}</p>
+                <p>(D) Destroyer: {destroyerSize}</p>
+                <p>(S) Submarine: {submarineSize}</p>
+                <p>(P) Patrol Boat: {patrolBoatSize}</p>
                 <p>{body_message}</p>
             </div>
         </div>

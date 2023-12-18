@@ -4,7 +4,9 @@ import styles from "./errormodal.css";
 
 import React, { useEffect, useState } from 'react';
 
-const ErrorModal = ({errorMessage, onClose}) => {
+const ErrorModal = ({errorMessage, onClose, gameState}) => {
+
+    const [closeButton, setCloseButton] = useState("X")
 
     const onEscClicked = () => {
         onClose();
@@ -26,15 +28,25 @@ const ErrorModal = ({errorMessage, onClose}) => {
         }
     })
 
+    useEffect(() => {
+        if (gameState == "Invalid Ship Placement"){
+            setCloseButton("↻")
+          } else setCloseButton("X")
+    }, [gameState])
+
 
     return (
         <div 
         className="error-container" 
         onClick={() => {
             onClose();
+
+            if(gameState == "Invalid Ship Placement"){
+                window.location.reload(false)
+              }
         }}
         >
-            <div className="close-button">X</div>
+            <div className="close-button">{closeButton}</div>
             <div>{errorMessage}</div>
         </div>
     )

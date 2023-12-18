@@ -4,16 +4,47 @@ import { Fragment, useState } from "react";
 import styles from "./buttons.css";
 import HelpModal from "../helpmodal/helpmodal";
 
-export default function ContinueButton({onUpdateGameState, onUpdateErrorState}){
+export default function ContinueButton({ gameState, onUpdateGameState, onUpdateErrorState}){
     const [startButtonText, setStartButtonText] = useState("Start")
 
     const continueGame = () => {
         if (startButtonText === "Start"){
-            setStartButtonText("Continue")
+            setStartButtonText("Confirm Selection")
+            onUpdateGameState("User Carrier Selection")
+            onUpdateErrorState(false)
         }
 
-        onUpdateGameState("User Ship Selection")
-        onUpdateErrorState(false)
+        else if (gameState === "User Carrier Selection"){
+            onUpdateGameState("User Battleship Selection")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "User Battleship Selection"){
+            onUpdateGameState("User Destroyer Selection")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "User Destroyer Selection"){
+            onUpdateGameState("User Submarine Selection")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "User Submarine Selection"){
+            setStartButtonText("Validate")
+            onUpdateGameState("User Patrol Boat Selection")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "User Patrol Boat Selection"){
+            setStartButtonText("Continue")
+            onUpdateGameState("User Ship Selection Validation")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "Validated User Ship Selection"){
+            setStartButtonText("Validated User Ship Selection")
+        }
+
     }
 
     return (
@@ -27,21 +58,57 @@ export function RestartButton({gameState}){
     )
 }
 
-export function ResetBoard({gameState}){
+export function ResetBoard({gameState, onUpdateGameState, onSetClearBoard}){
+    const resetCells = () => {
+        if (
+            gameState == "User Carrier Selection" ||
+            gameState == "User Battleship Selection" ||
+            gameState == "User Destroyer Selection" ||
+            gameState == "User Submarine Selection" ||
+            gameState == "User Patrol Boat Selection"
+            ) {
+            onUpdateGameState("User Carrier Selection")
+            onSetClearBoard(true)
+        }
+    }
+
     return (
-        <button className="btn reset">Reset Board</button>
+        <button className="btn reset" onClick={resetCells}>Reset Board</button>
     )
 }
 
-export function AutoPlace({gameState}){
+export function AutoPlace({ gameState, autoPlace, onSetAutoPlace }){
+
+    const triggerAutoPlace = () => {
+        if (gameState == "User Carrier Selection") {
+            onSetAutoPlace("Carrier")
+        } else if (gameState == "User Battleship Selection"){
+            onSetAutoPlace("Battleship")
+        } else if (gameState == "User Destroyer Selection"){
+            onSetAutoPlace("Destroyer")
+        } else if (gameState == "User Submarine Selection"){
+            onSetAutoPlace("Submarine")
+        } else if (gameState == "User Patrol Boat Selection"){
+            onSetAutoPlace("Patrol Boat")
+        }
+    }
+    
     return (
-        <button className="btn autoplace">Auto Place</button>
+        <button className="btn autoplace" onClick={triggerAutoPlace}>Auto Place</button>
     )
 }
 
-export function AutoPlaceAll({gameState}){
+export function AutoPlaceAll({ gameState, autoPlace, onSetAutoPlace }){
+    //verify game state and then send back an 'all' response to onSetAutoPlace
+
+    const triggerAutoPlaceAll = () => {
+        if (gameState == "User Carrier Selection") {
+            onSetAutoPlace("Autoplace All")
+        }
+    }
+
     return (
-        <button className="btn autoplaceall">Auto Place All</button>
+        <button className="btn autoplaceall" onClick={triggerAutoPlaceAll}>Auto Place All</button>
     )
 }
 

@@ -13,6 +13,8 @@ export default function Play({ searchParams, config }) {
     const [currentGameState, setCurrentGameState] = useState("Start")
     const [errorModalOpen, setErrorModalOpen] = useState(false)
     const [errorMessage, setErrorMessage] = useState("Generic Error")
+    const [clearBoard, setClearBoard] = useState(false)
+    const [autoPlaceType, setAutoPlaceType] = useState(String)
 
     const updateCurrentGameState = (newState) => {
       setCurrentGameState(newState);
@@ -20,6 +22,14 @@ export default function Play({ searchParams, config }) {
 
     const updateErrorMessage = (newMessage) => {
       setErrorMessage(newMessage)
+    }
+
+    const updateClearBoard = (decision) => {
+      setClearBoard(decision)
+    }
+
+    const updateAutoPlaceType = (type) => {
+      setAutoPlaceType(type)
     }
   
     return (
@@ -36,8 +46,13 @@ export default function Play({ searchParams, config }) {
                 width = {config.gridWidth}
                 height = {config.gridHeight}
                 gameState = {currentGameState}
+                onUpdateGameState = {updateCurrentGameState}
                 onUpdateErrorState = {setErrorModalOpen}
                 onSetErrorMessage = {updateErrorMessage}
+                clearBoardStatus = {clearBoard}
+                onSetClearBoard = {updateClearBoard}
+                autoPlace = {autoPlaceType}
+                onSetAutoPlace = {updateAutoPlaceType}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}
@@ -65,6 +80,11 @@ export default function Play({ searchParams, config }) {
           <br/>
           <MessageLog
             gameState = {currentGameState}
+            carrier = {config.carrierSize}
+            battleship = {config.carrierSize}
+            destroyer = {config.destroyerSize}
+            submarine = {config.submarineSize}
+            patrolBoat = {config.patrolBoatSize}
           />
           <br/>
 
@@ -74,22 +94,30 @@ export default function Play({ searchParams, config }) {
               onClose={() => {
                 setErrorModalOpen(false);
               }}
+              gameState={currentGameState}
             />
           ) : null}
   
           <div className="button-container">
             <ContinueButton
+              gameState={ currentGameState }
               onUpdateGameState = {updateCurrentGameState}
               onUpdateErrorState = {setErrorModalOpen}
             />
             <AutoPlace 
               gameState = {currentGameState}
+              autoPlace = {autoPlaceType}
+              onSetAutoPlace = {updateAutoPlaceType}
             />
             <AutoPlaceAll 
               gameState = {currentGameState}
+              autoPlace = {autoPlaceType}
+              onSetAutoPlace = {updateAutoPlaceType}
             />
             <ResetBoard
               gameState = {currentGameState}
+              onUpdateGameState = {updateCurrentGameState}
+              onSetClearBoard = {updateClearBoard}
             />
             <RestartButton
               gameState = {currentGameState}
