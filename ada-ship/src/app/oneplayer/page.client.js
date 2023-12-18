@@ -67,6 +67,13 @@ export default function Play({ searchParams, config }) {
                 width = {config.gridWidth}
                 height = {config.gridHeight}
                 gameState = {currentGameState}
+                onUpdateGameState = {updateCurrentGameState}
+                onUpdateErrorState = {setErrorModalOpen}
+                onSetErrorMessage = {updateErrorMessage}
+                clearBoardStatus = {clearBoard}
+                onSetClearBoard = {updateClearBoard}
+                autoPlace = {autoPlaceType}
+                onSetAutoPlace = {updateAutoPlaceType}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}

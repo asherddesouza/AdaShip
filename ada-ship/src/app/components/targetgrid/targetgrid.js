@@ -5,7 +5,23 @@ import styles from "./targetgrid.css";
 
 import React, { useEffect, useState } from 'react';
 
-export default function TargetGrid({ width = 10, height = 10, gameState, carrier, battleship, destroyer, submarine, patrolBoat }) {
+export default function TargetGrid({ 
+  width = 10, 
+  height = 10, 
+  gameState,
+  onUpdateGameState,
+  onUpdateErrorState, 
+  onSetErrorMessage,
+  clearBoardStatus = false,
+  onSetClearBoard,
+  autoPlace,
+  onSetAutoPlace,
+  carrier, 
+  battleship, 
+  destroyer, 
+  submarine, 
+  patrolBoat }) {
+
   const [gameboardLogic, setGameboardLogic] = useState([]);
 
   useEffect(() => {
@@ -34,6 +50,23 @@ export default function TargetGrid({ width = 10, height = 10, gameState, carrier
       }
     };
 
+    useEffect(() => {
+      const generateBackendOpponentGrid = () => {
+        if (gameState == "User Carrier Selection"){
+          let opponentArray = [];
+  
+          for (let i = 0; i < width; i++){
+            opponentArray.push([''])
+          }
+  
+          return opponentArray
+        }
+      }
+
+      generateBackendOpponentGrid()
+    }, gameState)
+
+    
 
 
   // create functions that create shipboards for CPU and player

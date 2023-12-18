@@ -42,7 +42,9 @@ export default function ContinueButton({ gameState, onUpdateGameState, onUpdateE
         }
 
         else if (gameState === "Validated User Ship Selection"){
-            setStartButtonText("Validated User Ship Selection")
+            setStartButtonText("Continue")
+            onUpdateGameState("User Attack")
+            onUpdateErrorState(false)
         }
 
     }
