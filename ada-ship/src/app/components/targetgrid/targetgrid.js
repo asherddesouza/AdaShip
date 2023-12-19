@@ -28,43 +28,69 @@ export default function TargetGrid({
     const initializeGameboard = () => {
       const initialGameboard = [];
 
-      for (let i = 0; i < width; i++) {
-        const row = Array.from({ length: height }, () => '');
-        initialGameboard.push(row);
+      let carrierPositionArray = [], carrierCount = carrier
+      let battleshipPositionArray = [], battleshipCount = battleship
+      let destroyerPositionArray = [], destroyerCount = destroyer
+      let submarinePositionArray = [], submarineCount = submarine
+      let patrolBoatPositionArray = [], patrolBoatCount = patrolBoat
+
+      if (gameState === "Start"){
+        for (let i = 0; i < width; i++) {
+          const row = Array.from({ length: height }, () => '');
+          initialGameboard.push(row);
+        }
+  
+        for (let i = 0; i < carrier; i++){
+          //initialGameboard[0][i] = 'C'
+          carrierPositionArray.push([0, i])
+        }
+  
+        for (let i = 0; i < battleship; i++) {
+          //initialGameboard[i + 2][2] = 'B';
+          battleshipPositionArray.push([i + 2, 2])
+        }
+  
+        for (let i = 0; i < destroyer; i++) {
+          //initialGameboard[9][i + 5] = 'D';
+          destroyerPositionArray.push([9, i + 5])
+        }
+  
+        for (let i = 0; i < submarine; i++) {
+          //initialGameboard[i + 2][7] = 'S';
+          submarinePositionArray.push([i + 2, 7])
+        }
+  
+        for (let i = 0; i < patrolBoat; i++) {
+          //initialGameboard[5][i + 4] = 'P';
+          patrolBoatPositionArray.push([5, i + 4])
+        }
+
+        setGameboardLogic(initialGameboard);
       }
 
-      setGameboardLogic(initialGameboard);
+      onUpdateErrorState(true) 
+      onSetErrorMessage(`row: ${carrierPositionArray[0][0]}, col: ${carrierPositionArray[0][1]}`) //carrierPositionArray[individualCell][0 is row, 1 is col]
+      
     };
 
     initializeGameboard();
   }, [width, height]);
 
     const handleCellClick = (row, column) => {
-      if (gameState === "User Ship Selection"){
+      if (gameState === "User Attack"){
       // Do something with the clicked cell, for example, update its content
       // access the cell using gameboardLogic[row][column]
       const updatedGameboard = [...gameboardLogic];
-      updatedGameboard[row][column] = '❌';
+
+      if (1 == 1){ // if the target has been hit
+        updatedGameboard[row][column] = '💣';
+      } else { // if the target has been missed
+        updatedGameboard[row][column] = '❌';
+      }
+
       setGameboardLogic(updatedGameboard);
-      // ❌ 💣 
       }
     };
-
-    useEffect(() => {
-      const generateBackendOpponentGrid = () => {
-        if (gameState == "User Carrier Selection"){
-          let opponentArray = [];
-  
-          for (let i = 0; i < width; i++){
-            opponentArray.push([''])
-          }
-  
-          return opponentArray
-        }
-      }
-
-      generateBackendOpponentGrid()
-    }, gameState)
 
     
 
