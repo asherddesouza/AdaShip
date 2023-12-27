@@ -41,27 +41,27 @@ export default function TargetGrid({
         }
   
         for (let i = 0; i < carrier; i++){
-          //initialGameboard[0][i] = 'C'
-          carrierPositionArray.push([0, i])
+          initialGameboard[0][i + 1] = 'C'
+          carrierPositionArray.push([0, i + 1])
         }
   
         for (let i = 0; i < battleship; i++) {
-          //initialGameboard[i + 2][2] = 'B';
-          battleshipPositionArray.push([i + 2, 2])
+          initialGameboard[i + 3][2] = 'B';
+          battleshipPositionArray.push([i + 3, 2])
         }
   
         for (let i = 0; i < destroyer; i++) {
-          //initialGameboard[9][i + 5] = 'D';
+          initialGameboard[9][i + 5] = 'D';
           destroyerPositionArray.push([9, i + 5])
         }
   
         for (let i = 0; i < submarine; i++) {
-          //initialGameboard[i + 2][7] = 'S';
+          initialGameboard[i + 2][7] = 'S';
           submarinePositionArray.push([i + 2, 7])
         }
   
         for (let i = 0; i < patrolBoat; i++) {
-          //initialGameboard[5][i + 4] = 'P';
+          initialGameboard[5][i + 4] = 'P';
           patrolBoatPositionArray.push([5, i + 4])
         }
 
@@ -72,6 +72,8 @@ export default function TargetGrid({
       onSetErrorMessage(`row: ${carrierPositionArray[0][0]}, col: ${carrierPositionArray[0][1]}`) //carrierPositionArray[individualCell][0 is row, 1 is col]
       
     };
+
+    
 
     initializeGameboard();
   }, [width, height]);

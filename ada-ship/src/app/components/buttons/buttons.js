@@ -54,7 +54,7 @@ export default function ContinueButton({ gameState, onUpdateGameState, onUpdateE
     )
 }
 
-export function RestartButton({gameState}){
+export function RestartButton(){
     return (
         <button className="btn restart" onClick={() => window.location.reload(false)}>Restart Game</button>
     )
@@ -80,6 +80,8 @@ export function ResetBoard({gameState, onUpdateGameState, onSetClearBoard}){
 }
 
 export function AutoPlace({ gameState, autoPlace, onSetAutoPlace }){
+
+    console.log(`AutoPlace Status: ${autoPlace}`)
 
     const triggerAutoPlace = () => {
         if (gameState == "User Carrier Selection") {

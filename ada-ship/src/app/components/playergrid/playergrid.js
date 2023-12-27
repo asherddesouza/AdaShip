@@ -173,38 +173,93 @@ export default function PlayerGrid({
     checkShipValidPlacement()
   }, [gameState])
 
+  const determineShipOrientation = () => {
+    return Math.random() < 0.5 ? "Horizontal" : "Vertical"
+  }
+
   useEffect(() => {
   const autoPlaceShips = () => {
+
+    const shipPositionRow = Math.floor(Math.random() * width)
+
+    let carrierPosition = Math.floor(Math.random() * carrier + 1)
+    let battleshipPosition = Math.floor(Math.random() * battleship + 1)
+    let destroyerPosition = Math.floor(Math.random() * destroyer + 1)
+    let submarinePosition = Math.floor(Math.random() * submarine + 1)
+    let patrolBoatPosition = Math.floor(Math.random() * patrolBoat + 1)
+
+    const carrierOrientation = determineShipOrientation()
+    const battleshipOrientation = determineShipOrientation()
+    const destroyerOrientation = determineShipOrientation()
+    const submarineOrientation = determineShipOrientation()
+    const patrolBoatOrientation = determineShipOrientation()
+
+
     setGameboardLogic((currentGameboard) => {
       const updatedGameboard = [...currentGameboard];
 
       if (autoPlace === "Carrier") {
-        for (let i = 0; i < carrier; i++) {
-          updatedGameboard[0][i + 2] = 'C';
+        if (carrierOrientation === "Horizontal"){
+          for (let i = 0; i < carrier; i++) {
+            updatedGameboard[shipPositionRow][i + carrierPosition] = 'C';
+          }
+        } 
+        else if (carrierOrientation === "Vertical"){
+          for (let i = 0; i < carrier; i++) {
+            updatedGameboard[i + carrierPosition][carrierPosition] = 'C';
+          }
         }
       }
 
       if (autoPlace === "Battleship") {
-        for (let i = 0; i < battleship; i++) {
-          updatedGameboard[i + 3][5] = 'B';
+        if (battleshipOrientation === "Horizontal"){
+          for (let i = 0; i < battleship; i++) {
+            updatedGameboard[shipPositionRow][i + battleshipPosition] = 'B';
+          }
+        } 
+        else if (battleshipOrientation === "Vertical"){
+          for (let i = 0; i < battleship; i++) {
+            updatedGameboard[i + battleshipPosition][battleshipPosition] = 'B';
+          }
         }
       }
 
       if (autoPlace === "Destroyer") {
-        for (let i = 0; i < destroyer; i++) {
-          updatedGameboard[9][i] = 'D';
+        if (destroyerOrientation === "Horizontal"){
+          for (let i = 0; i < destroyer; i++) {
+            updatedGameboard[shipPositionRow][i + destroyerPosition] = 'D';
+          }
+        } 
+        else if (destroyerOrientation === "Vertical"){
+          for (let i = 0; i < destroyer; i++) {
+            updatedGameboard[i + destroyerPosition][destroyerPosition] = 'D';
+          }
         }
       }
 
       if (autoPlace === "Submarine") {
-        for (let i = 0; i < submarine; i++) {
-          updatedGameboard[i + 5][7] = 'S';
+        if (submarineOrientation === "Horizontal"){
+          for (let i = 0; i < submarine; i++) {
+            updatedGameboard[shipPositionRow][i + submarinePosition] = 'S';
+          }
+        } 
+        else if (submarineOrientation === "Vertical"){
+          for (let i = 0; i < submarine; i++) {
+            updatedGameboard[i + submarinePosition][submarinePosition] = 'S';
+          }
         }
       }
 
       if (autoPlace === "Patrol Boat") {
-        for (let i = 0; i < patrolBoat; i++) {
-          updatedGameboard[5][i + 2] = 'P';
+        if (patrolBoatOrientation === "Horizontal"){
+          for (let i = 0; i < patrolBoat; i++) {
+            updatedGameboard[shipPositionRow][i + patrolBoatPosition] = 'P';
+          }
+        } 
+        else if (patrolBoatOrientation === "Vertical"){
+          for (let i = 0; i < submarine; i++) {
+            updatedGameboard[i + patrolBoatPosition][patrolBoatPosition] = 'P';
+          }
         }
       }
 
