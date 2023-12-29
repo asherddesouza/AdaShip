@@ -118,6 +118,7 @@ export default function Play({ searchParams, config }) {
             />
             <AutoPlaceAll 
               gameState = {currentGameState}
+              onUpdateGameState = {updateCurrentGameState}
               autoPlace = {autoPlaceType}
               onSetAutoPlace = {updateAutoPlaceType}
             />

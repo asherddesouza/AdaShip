@@ -102,12 +102,13 @@ export function AutoPlace({ gameState, autoPlace, onSetAutoPlace }){
     )
 }
 
-export function AutoPlaceAll({ gameState, autoPlace, onSetAutoPlace }){
+export function AutoPlaceAll({ gameState, onUpdateGameState, autoPlace, onSetAutoPlace }){
     //verify game state and then send back an 'all' response to onSetAutoPlace
 
     const triggerAutoPlaceAll = () => {
         if (gameState == "User Carrier Selection") {
             onSetAutoPlace("Autoplace All")
+            //onUpdateGameState("User Patrol Boat Selection")
         }
     }
 

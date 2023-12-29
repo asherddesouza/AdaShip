@@ -68,8 +68,7 @@ export default function TargetGrid({
         setGameboardLogic(initialGameboard);
       }
 
-      onUpdateErrorState(true) 
-      onSetErrorMessage(`row: ${carrierPositionArray[0][0]}, col: ${carrierPositionArray[0][1]}`) //carrierPositionArray[individualCell][0 is row, 1 is col]
+      console.log(`row: ${carrierPositionArray[0][0]}, col: ${carrierPositionArray[0][1]}`) //carrierPositionArray[individualCell][0 is row, 1 is col]
       
     };
 
