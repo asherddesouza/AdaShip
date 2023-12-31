@@ -8,6 +8,8 @@ export default function PlayerGrid({
   width = 10, 
   height = 10, 
   gameState,
+  userMessage,
+  onUpdateUserMessage,
   onUpdateGameState,
   onUpdateErrorState, 
   onSetErrorMessage,

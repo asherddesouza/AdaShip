@@ -81,8 +81,6 @@ export function ResetBoard({gameState, onUpdateGameState, onSetClearBoard}){
 
 export function AutoPlace({ gameState, autoPlace, onSetAutoPlace }){
 
-    console.log(`AutoPlace Status: ${autoPlace}`)
-
     const triggerAutoPlace = () => {
         if (gameState == "User Carrier Selection") {
             onSetAutoPlace("Carrier")

@@ -15,9 +15,14 @@ export default function Play({ searchParams, config }) {
     const [errorMessage, setErrorMessage] = useState("Generic Error")
     const [clearBoard, setClearBoard] = useState(false)
     const [autoPlaceType, setAutoPlaceType] = useState(String)
+    const [userMessage, setUserMessage] = useState();
 
     const updateCurrentGameState = (newState) => {
       setCurrentGameState(newState);
+    }
+
+    const updateUserMessage = (newMessage) => {
+      setUserMessage(newMessage)
     }
 
     const updateErrorMessage = (newMessage) => {
@@ -46,6 +51,8 @@ export default function Play({ searchParams, config }) {
                 width = {config.gridWidth}
                 height = {config.gridHeight}
                 gameState = {currentGameState}
+                userMessage = {userMessage}
+                onUpdateUserMessage = {updateUserMessage}
                 onUpdateGameState = {updateCurrentGameState}
                 onUpdateErrorState = {setErrorModalOpen}
                 onSetErrorMessage = {updateErrorMessage}
@@ -67,6 +74,8 @@ export default function Play({ searchParams, config }) {
                 width = {config.gridWidth}
                 height = {config.gridHeight}
                 gameState = {currentGameState}
+                userMessage = {userMessage}
+                onUpdateUserMessage = {updateUserMessage}
                 onUpdateGameState = {updateCurrentGameState}
                 onUpdateErrorState = {setErrorModalOpen}
                 onSetErrorMessage = {updateErrorMessage}
@@ -87,6 +96,8 @@ export default function Play({ searchParams, config }) {
           <br/>
           <MessageLog
             gameState = {currentGameState}
+            userMessage = {userMessage}
+            onUpdateUserMessage = {updateUserMessage}
             carrier = {config.carrierSize}
             battleship = {config.carrierSize}
             destroyer = {config.destroyerSize}
