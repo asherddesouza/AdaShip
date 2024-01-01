@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import styles from "./buttons.css";
 import HelpModal from "../helpmodal/helpmodal";
 
@@ -110,13 +110,11 @@ export function AutoPlace({ gameState, autoPlace, onSetAutoPlace }){
     )
 }
 
-export function AutoPlaceAll({ gameState, onUpdateGameState, autoPlace, onSetAutoPlace }){
-    //verify game state and then send back an 'all' response to onSetAutoPlace
+export function AutoPlaceAll({ gameState, onSetAutoPlace }){
 
     const triggerAutoPlaceAll = () => {
         if (gameState == "User Carrier Selection") {
             onSetAutoPlace("Autoplace All")
-            //onUpdateGameState("User Patrol Boat Selection")
         }
     }
 

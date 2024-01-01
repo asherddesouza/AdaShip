@@ -1,6 +1,5 @@
 'use client'
 
-import { createElement } from "react";
 import styles from "./targetgrid.css";
 
 import React, { useEffect, useState } from 'react';
@@ -9,15 +8,8 @@ export default function TargetGrid({
   width = 10, 
   height = 10, 
   gameState,
-  userMessage,
   onUpdateUserMessage,
   onUpdateGameState,
-  onUpdateErrorState, 
-  onSetErrorMessage,
-  clearBoardStatus = false,
-  onSetClearBoard,
-  autoPlace,
-  onSetAutoPlace,
   carrier, 
   battleship, 
   destroyer, 
@@ -93,7 +85,6 @@ export default function TargetGrid({
   }
 
   const shipMessage = () => {
-    // This will run every time boatsRemaining changes
     console.log('boatsRemaining: ', boatsRemaining);
 
     if (boatsRemaining[0] <= 0){
@@ -273,11 +264,6 @@ export default function TargetGrid({
       setGameboardLogic(updatedGameboard);
       }
     }
-    
-
-
-  // create functions that create shipboards for CPU and player
-  // create an autoplace function that can be called during initial generation
   
 
   return (
