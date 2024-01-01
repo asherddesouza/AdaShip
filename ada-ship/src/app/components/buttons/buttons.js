@@ -47,6 +47,16 @@ export default function ContinueButton({ gameState, onUpdateGameState, onUpdateE
             onUpdateErrorState(false)
         }
 
+        else if (gameState === "Change Attacker (CPU)"){
+            onUpdateGameState("CPU Attack")
+            onUpdateErrorState(false)
+        }
+
+        else if (gameState === "Change Attacker (User)"){
+            onUpdateGameState("User Attack")
+            onUpdateErrorState(false)
+        }
+
     }
 
     return (

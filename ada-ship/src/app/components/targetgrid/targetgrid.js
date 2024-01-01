@@ -159,7 +159,7 @@ export default function TargetGrid({
       boatsDestroyed[3] == true &&
       boatsDestroyed[4] == true
       ){
-        onUpdateUserMessage("All opponent ships destroyed - you win! 🎉")
+        onUpdateGameState("User Win")
     }
   }
 
@@ -274,13 +274,12 @@ export default function TargetGrid({
 
       if (checkForEnemyShip(row, column)){
         updatedGameboard[row][column] = '💣';
-      } 
-      
-      else { // if the target has been missed
+      } else { // if the target has been missed
         updatedGameboard[row][column] = '❌';
         onUpdateUserMessage("You Missed!")
       }
 
+      onUpdateGameState("Change Attacker (CPU)")
       setGameboardLogic(updatedGameboard);
       }
     }

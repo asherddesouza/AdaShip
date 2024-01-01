@@ -22,6 +22,7 @@ function parser(file){
   let boat_destroyer = parseInt(newLines[3].replace(/\D/g, ""));
   let boat_submarine = parseInt(newLines[4].replace(/\D/g, ""));
   let boat_patrolboat = parseInt(newLines[5].replace(/\D/g, ""));
+  
 
   const config = {
     gridWidth: grid_width,

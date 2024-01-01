@@ -41,6 +41,12 @@ const MessageLog = ({
     else if (gameState === "User Attack"){
       onUpdateUserMessage("Choose a place on the opponent's grid to attack.")
     }
+    else if (gameState === "User Win"){
+      onUpdateUserMessage("All opponent ships destroyed - you win! 🎉")
+    }
+    else if (gameState === "CPU Win"){
+      onUpdateUserMessage("All your ships were destroyed - you lose... 😢")
+    }
 
     else {
       null
