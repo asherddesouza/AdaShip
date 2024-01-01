@@ -22,6 +22,7 @@ function parser(file){
   let boat_destroyer = parseInt(newLines[3].replace(/\D/g, ""));
   let boat_submarine = parseInt(newLines[4].replace(/\D/g, ""));
   let boat_patrolboat = parseInt(newLines[5].replace(/\D/g, ""));
+  
 
   const config = {
     gridWidth: grid_width,
@@ -45,13 +46,3 @@ export default async function Page() {
     />
   )
 }
-
-
-  // make autoplacing ships work for individual boat types as well as autoplacing all
-
-  // create an opponent array and let it use the autoplace function
-
-  // let a user attack somewhere on the board, but it can't be somewhere they've previously attacked
-  // create an autofire function that fires at random valid areas on the board
-
-  //same thing but on the CPU side, use the autofire function for this

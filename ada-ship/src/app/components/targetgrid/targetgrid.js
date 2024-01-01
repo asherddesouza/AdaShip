@@ -1,6 +1,5 @@
 'use client'
 
-import { createElement } from "react";
 import styles from "./targetgrid.css";
 
 import React, { useEffect, useState } from 'react';
@@ -9,15 +8,8 @@ export default function TargetGrid({
   width = 10, 
   height = 10, 
   gameState,
-  userMessage,
   onUpdateUserMessage,
   onUpdateGameState,
-  onUpdateErrorState, 
-  onSetErrorMessage,
-  clearBoardStatus = false,
-  onSetClearBoard,
-  autoPlace,
-  onSetAutoPlace,
   carrier, 
   battleship, 
   destroyer, 
@@ -93,7 +85,6 @@ export default function TargetGrid({
   }
 
   const shipMessage = () => {
-    // This will run every time boatsRemaining changes
     console.log('boatsRemaining: ', boatsRemaining);
 
     if (boatsRemaining[0] <= 0){
@@ -159,7 +150,7 @@ export default function TargetGrid({
       boatsDestroyed[3] == true &&
       boatsDestroyed[4] == true
       ){
-        onUpdateUserMessage("All opponent ships destroyed - you win! 🎉")
+        onUpdateGameState("User Win")
     }
   }
 
@@ -187,13 +178,11 @@ export default function TargetGrid({
       // carrier placement
       if (carrierOrientation === "Horizontal"){
         for (let i = 0; i < carrier; i++) {
-          initialGameboard[0][i + carrierPosition] = `C`;
           setCarrierPositionArray((carrierPositionArray) => [...carrierPositionArray, [0, i + carrierPosition]])
         }
       } 
       else if (carrierOrientation === "Vertical"){
         for (let i = 0; i < carrier; i++) {
-          initialGameboard[i + carrierPosition][9] = `C`;
           setCarrierPositionArray((carrierPositionArray) => [...carrierPositionArray, [i + carrierPosition, 9]])
         }
       }
@@ -201,13 +190,11 @@ export default function TargetGrid({
       //battleship placement
       if (battleshipOrientation === "Horizontal"){
         for (let i = 0; i < battleship; i++) {
-          initialGameboard[1][i + battleshipPosition] = `B`;
           setBattleshipPositionArray((battleshipPositionArray) => [...battleshipPositionArray, [1, i + battleshipPosition]])
         }
       } 
       else if (battleshipOrientation === "Vertical"){
         for (let i = 0; i < battleship; i++) {
-          initialGameboard[i + battleshipPosition][1] = `B`;
           setBattleshipPositionArray((battleshipPositionArray) => [...battleshipPositionArray, [i + battleshipPosition, 1]])
         }
       }
@@ -215,13 +202,11 @@ export default function TargetGrid({
       //destroyer placement
       if (destroyerOrientation === "Horizontal"){
         for (let i = 0; i < destroyer; i++) {
-          initialGameboard[8][i + destroyerPosition] = `D`;
           setDestroyerPositionArray((destroyerPositionArray) => [...destroyerPositionArray, [8, i + destroyerPosition]])
         }
       } 
       else if (destroyerOrientation === "Vertical"){
         for (let i = 0; i < destroyer; i++) {
-          initialGameboard[i + destroyerPosition][7] = `D`;
           setDestroyerPositionArray((destroyerPositionArray) => [...destroyerPositionArray, [i + destroyerPosition, 7]])
         }
       }
@@ -229,13 +214,11 @@ export default function TargetGrid({
       //submarine placement
       if (submarineOrientation === "Horizontal"){
         for (let i = 0; i < submarine; i++) {
-          initialGameboard[3][i + submarinePosition] = `S`;
           setSubmarinePositionArray((submarinePositionArray) => [...submarinePositionArray, [3, i + submarinePosition]])
         }
       } 
       else if (submarineOrientation === "Vertical"){ 
         for (let i = 0; i < submarine; i++) {
-          initialGameboard[i + submarinePosition][3] = `S`;
           setSubmarinePositionArray((submarinePositionArray) => [...submarinePositionArray, [i + submarinePosition, 3]])
         }
       }
@@ -243,13 +226,11 @@ export default function TargetGrid({
       //patrol boat placement
       if (patrolBoatOrientation === "Horizontal"){
         for (let i = 0; i < patrolBoat; i++) {
-          initialGameboard[6][i + 4] = `P`;
           setPatrolBoatPositionArray((patrolBoatPositionArray) => [...patrolBoatPositionArray, [6, i + 4]])
         }
       }
       else if (patrolBoatOrientation === "Vertical"){
         for (let i = 0; i < patrolBoat; i++) {
-          initialGameboard[i + patrolBoatPosition][5] = `P`;
           setPatrolBoatPositionArray((patrolBoatPositionArray) => [...patrolBoatPositionArray, [i + patrolBoatPosition, 5]])
         }
       }
@@ -274,21 +255,15 @@ export default function TargetGrid({
 
       if (checkForEnemyShip(row, column)){
         updatedGameboard[row][column] = '💣';
-      } 
-      
-      else { // if the target has been missed
+      } else { // if the target has been missed
         updatedGameboard[row][column] = '❌';
         onUpdateUserMessage("You Missed!")
       }
 
+      onUpdateGameState("Change Attacker (CPU)")
       setGameboardLogic(updatedGameboard);
       }
     }
-    
-
-
-  // create functions that create shipboards for CPU and player
-  // create an autoplace function that can be called during initial generation
   
 
   return (

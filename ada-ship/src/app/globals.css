@@ -71,3 +71,8 @@ a:hover {
 a:active {
   text-decoration: underline;
 }
+
+.in-progress {
+  font-weight: bolder;
+  color: #d7e62a;
+}

@@ -51,7 +51,6 @@ export default function Play({ searchParams, config }) {
                 width = {config.gridWidth}
                 height = {config.gridHeight}
                 gameState = {currentGameState}
-                userMessage = {userMessage}
                 onUpdateUserMessage = {updateUserMessage}
                 onUpdateGameState = {updateCurrentGameState}
                 onUpdateErrorState = {setErrorModalOpen}
@@ -59,7 +58,6 @@ export default function Play({ searchParams, config }) {
                 clearBoardStatus = {clearBoard}
                 onSetClearBoard = {updateClearBoard}
                 autoPlace = {autoPlaceType}
-                onSetAutoPlace = {updateAutoPlaceType}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}
@@ -77,12 +75,6 @@ export default function Play({ searchParams, config }) {
                 userMessage = {userMessage}
                 onUpdateUserMessage = {updateUserMessage}
                 onUpdateGameState = {updateCurrentGameState}
-                onUpdateErrorState = {setErrorModalOpen}
-                onSetErrorMessage = {updateErrorMessage}
-                clearBoardStatus = {clearBoard}
-                onSetClearBoard = {updateClearBoard}
-                autoPlace = {autoPlaceType}
-                onSetAutoPlace = {updateAutoPlaceType}
                 carrier = {config.carrierSize}
                 battleship = {config.carrierSize}
                 destroyer = {config.destroyerSize}
@@ -129,8 +121,6 @@ export default function Play({ searchParams, config }) {
             />
             <AutoPlaceAll 
               gameState = {currentGameState}
-              onUpdateGameState = {updateCurrentGameState}
-              autoPlace = {autoPlaceType}
               onSetAutoPlace = {updateAutoPlaceType}
             />
             <ResetBoard

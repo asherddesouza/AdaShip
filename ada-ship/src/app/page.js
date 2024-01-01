@@ -37,25 +37,6 @@ export default function Home() {
       <div className='game-selector'>
         <Link
           href={{
-            pathname: "/twoplayer",
-            query: {gamemode: "normal"}
-        }}
-        >
-          <h2>
-            Two Player{' '}
-            <span>
-              -&gt;
-            </span>
-          </h2>
-          <p>
-            Play locally against another person.
-          </p>
-        </Link>
-      </div>
-
-      <div className='game-selector'>
-        <Link
-          href={{
             pathname: "/oneplayer",
             query: {gamemode: "salvo"}
         }}>
@@ -68,25 +49,7 @@ export default function Home() {
           <p>
             Play against a computer-generated opponent in Salvo mode.
           </p>
-        </Link>
-      </div>
-
-      <div className='game-selector'>
-        <Link
-          href={{
-            pathname: "/twoplayer",
-            query: {gamemode: "salvo"}
-        }}
-        >
-          <h2>
-            Two Player (Salvo){' '}
-            <span>
-              -&gt;
-            </span>
-          </h2>
-          <p>
-            Play locally against another person in Salvo mode.
-          </p>
+          <p className='in-progress'>(Unfinished)</p>
         </Link>
       </div>
 

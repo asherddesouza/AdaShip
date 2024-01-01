@@ -8,7 +8,6 @@ export default function PlayerGrid({
   width = 10, 
   height = 10, 
   gameState,
-  userMessage,
   onUpdateUserMessage,
   onUpdateGameState,
   onUpdateErrorState, 
@@ -16,7 +15,6 @@ export default function PlayerGrid({
   clearBoardStatus = false,
   onSetClearBoard,
   autoPlace,
-  onSetAutoPlace,
   carrier, 
   battleship, 
   destroyer, 
@@ -24,6 +22,14 @@ export default function PlayerGrid({
   patrolBoat }) {
   
   const [gameboardLogic, setGameboardLogic] = useState([]);
+  const [carrierPositionArray, setCarrierPositionArray] = useState([])
+  const [battleshipPositionArray, setBattleshipPositionArray] = useState([])
+  const [destroyerPositionArray, setDestroyerPositionArray] = useState([])
+  const [submarinePositionArray, setSubmarinePositionArray] = useState([])
+  const [patrolBoatPositionArray, setPatrolBoatPositionArray] = useState([])
+  const [boatsRemaining, setBoatsRemaining] = useState([carrier, battleship, destroyer, submarine, patrolBoat])
+  const [boatsDestroyed, setBoatsDestroyed] = useState([false, false, false, false, false])
+  const [enemyAttackLog, setEnemyAttackLog] = useState([[9, 0], [7, 2], [5, 4], [4, 6], [2, 8]]) // to increase difficulty, 5 cells have been blocked off for attack
 
   useEffect(() => {
       const initialiseGameboard = () => {
@@ -178,6 +184,81 @@ export default function PlayerGrid({
     return Math.random() < 0.5 ? "Horizontal" : "Vertical"
   }
 
+  useEffect(() => {
+    const shipMessage = () => {
+      // This will run every time boatsRemaining changes
+      console.log('boatsRemaining: ', boatsRemaining);
+  
+      if (boatsRemaining[0] <= 0){
+        onUpdateUserMessage("All your Carriers have been destroyed!")
+  
+        const updatedBoatsRemaining = [...boatsRemaining]
+        updatedBoatsRemaining[0] += 1
+        setBoatsRemaining(updatedBoatsRemaining)
+  
+        const updatedBoatsDestroyed = [...boatsDestroyed]
+        updatedBoatsDestroyed[0] = true
+        setBoatsDestroyed(updatedBoatsDestroyed)
+      }
+      if (boatsRemaining[1] <= 0){
+        onUpdateUserMessage("All your Battleships have been destroyed!")
+  
+        const updatedBoatsRemaining = [...boatsRemaining]
+        updatedBoatsRemaining[1] += 1
+        setBoatsRemaining(updatedBoatsRemaining)
+  
+        const updatedBoatsDestroyed = [...boatsDestroyed]
+        updatedBoatsDestroyed[1] = true
+        setBoatsDestroyed(updatedBoatsDestroyed)
+      }
+      if (boatsRemaining[2] <= 0){
+        onUpdateUserMessage("All your Destroyers have been destroyed!")
+  
+        const updatedBoatsRemaining = [...boatsRemaining]
+        updatedBoatsRemaining[2] += 1
+        setBoatsRemaining(updatedBoatsRemaining)
+  
+        const updatedBoatsDestroyed = [...boatsDestroyed]
+        updatedBoatsDestroyed[2] = true
+        setBoatsDestroyed(updatedBoatsDestroyed)
+      }
+      if (boatsRemaining[3] <= 0){
+        onUpdateUserMessage("All your Submarines have been destroyed!")
+  
+        const updatedBoatsRemaining = [...boatsRemaining]
+        updatedBoatsRemaining[3] += 1
+        setBoatsRemaining(updatedBoatsRemaining)
+  
+        const updatedBoatsDestroyed = [...boatsDestroyed]
+        updatedBoatsDestroyed[3] = true
+        setBoatsDestroyed(updatedBoatsDestroyed)
+      }
+      if (boatsRemaining[4] <= 0){
+        onUpdateUserMessage("All your Patrol Boats have been destroyed!")
+  
+        const updatedBoatsRemaining = [...boatsRemaining]
+        updatedBoatsRemaining[4] += 1
+        setBoatsRemaining(updatedBoatsRemaining)
+  
+        const updatedBoatsDestroyed = [...boatsDestroyed]
+        updatedBoatsDestroyed[4] = true
+        setBoatsDestroyed(updatedBoatsDestroyed)
+      }
+  
+      if (
+        boatsDestroyed[0] == true &&
+        boatsDestroyed[1] == true &&
+        boatsDestroyed[2] == true &&
+        boatsDestroyed[3] == true &&
+        boatsDestroyed[4] == true
+        ){
+          onUpdateGameState("CPU Win")
+      }
+    }
+
+    shipMessage()
+  }, [boatsRemaining])
+
 
   useEffect(() => {
   const autoPlaceShips = () => {
@@ -200,66 +281,75 @@ export default function PlayerGrid({
 
       if (autoPlace === "Autoplace All") {
         // carrier placement
-        if (carrierOrientation === "Horizontal"){
-          for (let i = 0; i < carrier; i++) {
-            updatedGameboard[0][i + carrierPosition] = `C`;
-          }
-        } 
-        else if (carrierOrientation === "Vertical"){
-          for (let i = 0; i < carrier; i++) {
-            updatedGameboard[i + carrierPosition][9] = `C`;
-          }
+      if (carrierOrientation === "Horizontal"){
+        for (let i = 0; i < carrier; i++) {
+          updatedGameboard[0][i + carrierPosition] = `C`;
+          setCarrierPositionArray((carrierPositionArray) => [...carrierPositionArray, [0, i + carrierPosition]])
         }
-
-        //battleship placement
-        if (battleshipOrientation === "Horizontal"){
-
-          for (let i = 0; i < battleship; i++) {
-            updatedGameboard[1][i + battleshipPosition] = `B`;
-          }
-        } 
-        else if (battleshipOrientation === "Vertical"){
-          for (let i = 0; i < battleship; i++) {
-            updatedGameboard[i + battleshipPosition][1] = `B`;
-          }
-        }
-
-        //destroyer placement
-        if (destroyerOrientation === "Horizontal"){
-          for (let i = 0; i < destroyer; i++) {
-            updatedGameboard[8][i + destroyerPosition] = `D`;
-          }
-        } 
-        else if (destroyerOrientation === "Vertical"){
-          for (let i = 0; i < destroyer; i++) {
-            updatedGameboard[i + destroyerPosition][7] = `D`;
-          }
-        }
- 
-        //submarine placement
-        if (submarineOrientation === "Horizontal"){
-          for (let i = 0; i < submarine; i++) {
-            updatedGameboard[3][i + submarinePosition] = `S`;
-          }
-        } 
-        else if (submarineOrientation === "Vertical"){ 
-          for (let i = 0; i < submarine; i++) {
-            updatedGameboard[i + submarinePosition][3] = `S`;
-          }
-        }
-
-        //patrol boat placement
-        if (patrolBoatOrientation === "Horizontal"){
-          for (let i = 0; i < patrolBoat; i++) {
-            updatedGameboard[6][i + 4] = `P`;
-          }
-        } 
-        else if (patrolBoatOrientation === "Vertical"){
-          for (let i = 0; i < patrolBoat; i++) {
-            updatedGameboard[i + patrolBoatPosition][5] = `P`;
-          }
+      } 
+      else if (carrierOrientation === "Vertical"){
+        for (let i = 0; i < carrier; i++) {
+          updatedGameboard[i + carrierPosition][9] = `C`;
+          setCarrierPositionArray((carrierPositionArray) => [...carrierPositionArray, [i + carrierPosition, 9]])
         }
       }
+
+      //battleship placement
+      if (battleshipOrientation === "Horizontal"){
+        for (let i = 0; i < battleship; i++) {
+          updatedGameboard[1][i + battleshipPosition] = `B`;
+          setBattleshipPositionArray((battleshipPositionArray) => [...battleshipPositionArray, [1, i + battleshipPosition]])
+        }
+      } 
+      else if (battleshipOrientation === "Vertical"){
+        for (let i = 0; i < battleship; i++) {
+          updatedGameboard[i + battleshipPosition][1] = `B`;
+          setBattleshipPositionArray((battleshipPositionArray) => [...battleshipPositionArray, [i + battleshipPosition, 1]])
+        }
+      }
+
+      //destroyer placement
+      if (destroyerOrientation === "Horizontal"){
+        for (let i = 0; i < destroyer; i++) {
+          updatedGameboard[8][i + destroyerPosition] = `D`;
+          setDestroyerPositionArray((destroyerPositionArray) => [...destroyerPositionArray, [8, i + destroyerPosition]])
+        }
+      } 
+      else if (destroyerOrientation === "Vertical"){
+        for (let i = 0; i < destroyer; i++) {
+          updatedGameboard[i + destroyerPosition][7] = `D`;
+          setDestroyerPositionArray((destroyerPositionArray) => [...destroyerPositionArray, [i + destroyerPosition, 7]])
+        }
+      }
+
+      //submarine placement
+      if (submarineOrientation === "Horizontal"){
+        for (let i = 0; i < submarine; i++) {
+          updatedGameboard[3][i + submarinePosition] = `S`;
+          setSubmarinePositionArray((submarinePositionArray) => [...submarinePositionArray, [3, i + submarinePosition]])
+        }
+      } 
+      else if (submarineOrientation === "Vertical"){ 
+        for (let i = 0; i < submarine; i++) {
+          updatedGameboard[i + submarinePosition][3] = `S`;
+          setSubmarinePositionArray((submarinePositionArray) => [...submarinePositionArray, [i + submarinePosition, 3]])
+        }
+      }
+
+      //patrol boat placement
+      if (patrolBoatOrientation === "Horizontal"){
+        for (let i = 0; i < patrolBoat; i++) {
+          updatedGameboard[6][i + 4] = `P`;
+          setPatrolBoatPositionArray((patrolBoatPositionArray) => [...patrolBoatPositionArray, [6, i + 4]])
+        }
+      }
+      else if (patrolBoatOrientation === "Vertical"){
+        for (let i = 0; i < patrolBoat; i++) {
+          updatedGameboard[i + patrolBoatPosition][5] = `P`;
+          setPatrolBoatPositionArray((patrolBoatPositionArray) => [...patrolBoatPositionArray, [i + patrolBoatPosition, 5]])
+        }
+      }
+    }
 
       if (autoPlace === "Carrier") {
         if (carrierOrientation === "Horizontal"){
@@ -332,6 +422,100 @@ export default function PlayerGrid({
 
   autoPlaceShips();
 }, [autoPlace]);
+
+useEffect(() => {
+  const enemyAttack = () => {
+    if (gameState === "CPU Attack"){
+      const updatedGameboard = [...gameboardLogic];
+
+      let attackCoordinate;
+      let containsCoordinate;
+
+      do {
+        const row = Math.floor(Math.random() * height)
+        const column = Math.floor(Math.random() * width)
+        attackCoordinate = [row, column]
+
+        containsCoordinate = enemyAttackLog.some(coord => coord[0] === attackCoordinate[0] && coord[1] === attackCoordinate[1]);
+
+      } while (containsCoordinate)
+
+      setEnemyAttackLog((enemyAttackLog) => [...enemyAttackLog, [attackCoordinate[0], attackCoordinate[1]]])
+
+      console.log("- CPU Attack -")
+      console.log(attackCoordinate)
+      console.log(enemyAttackLog)
+
+      const verifyAttack = () => {
+        for (let i = carrier; i < (carrier * 2); i++){
+          if (attackCoordinate[0] === carrierPositionArray[i][0] && attackCoordinate[1] === carrierPositionArray[i][1]){
+            onUpdateUserMessage("Your Carrier was hit!")
+            const updatedBoatsRemaining = [...boatsRemaining]
+            updatedBoatsRemaining[0] -= 1
+            setBoatsRemaining(updatedBoatsRemaining)
+            return true
+          }
+        }
+  
+        for (let i = battleship; i < (battleship * 2); i++){
+          if (attackCoordinate[0] === battleshipPositionArray[i][0] && attackCoordinate[1] === battleshipPositionArray[i][1]){
+            onUpdateUserMessage("Your Battleship was hit!")
+            const updatedBoatsRemaining = [...boatsRemaining]
+            updatedBoatsRemaining[1] -= 1
+            setBoatsRemaining(updatedBoatsRemaining)
+            return true
+          }
+        }
+  
+        for (let i = destroyer; i < (destroyer * 2); i++){
+          if (attackCoordinate[0] === destroyerPositionArray[i][0] && attackCoordinate[1] === destroyerPositionArray[i][1]){
+            onUpdateUserMessage("Your Destroyer was hit!")
+            const updatedBoatsRemaining = [...boatsRemaining]
+            updatedBoatsRemaining[2] -= 1
+            setBoatsRemaining(updatedBoatsRemaining)
+            return true
+          }
+        }
+  
+        for (let i = submarine; i < (submarine * 2); i++){
+          if (attackCoordinate[0] === submarinePositionArray[i][0] && attackCoordinate[1] === submarinePositionArray[i][1]){
+            onUpdateUserMessage("Your Submarine was hit!")
+            const updatedBoatsRemaining = [...boatsRemaining]
+            updatedBoatsRemaining[3] -= 1
+            setBoatsRemaining(updatedBoatsRemaining)
+            return true
+          }
+        }
+  
+        for (let i = patrolBoat; i < (patrolBoat * 2); i++){
+          if (attackCoordinate[0] === patrolBoatPositionArray[i][0] && attackCoordinate[1] === patrolBoatPositionArray[i][1]){
+            onUpdateUserMessage("Your Patrol Boat was hit!")
+            const updatedBoatsRemaining = [...boatsRemaining]
+            updatedBoatsRemaining[4] -= 1
+            setBoatsRemaining(updatedBoatsRemaining)
+            return true
+          }
+        }
+      }
+
+      if (verifyAttack()){
+        updatedGameboard[attackCoordinate[0]][attackCoordinate[1]] = '💣';
+      } else {
+        updatedGameboard[attackCoordinate[0]][attackCoordinate[1]] = '❌';
+        onUpdateUserMessage("Opponent Missed!")
+      }
+
+      onUpdateGameState("Change Attacker (User)")
+
+
+      
+
+      setGameboardLogic(updatedGameboard);
+    }
+  }
+
+  enemyAttack()
+}, [gameState])
 
   const handleCellClick = (row, column) => {
     const updatedGameboard = [...gameboardLogic];
