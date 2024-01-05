@@ -7,8 +7,7 @@ import MessageLog from "../components/messagelog/messagelog";
 import ErrorModal from "../components/errormodal/errormodal";
 import React, { useState } from 'react';
 
-export default function Play({ searchParams, config }) {
-    //const gamemode = searchParams.gamemode;
+export default function Play({ config }) {
 
     const [currentGameState, setCurrentGameState] = useState("Start")
     const [errorModalOpen, setErrorModalOpen] = useState(false)

@@ -185,7 +185,7 @@ export default function PlayerGrid({
   }
 
   useEffect(() => {
-    const shipMessage = () => {
+    const checkShipStatus = () => {
       // This will run every time boatsRemaining changes
       console.log('boatsRemaining: ', boatsRemaining);
   
@@ -256,7 +256,7 @@ export default function PlayerGrid({
       }
     }
 
-    shipMessage()
+    checkShipStatus()
   }, [boatsRemaining])
 
 
@@ -521,9 +521,7 @@ useEffect(() => {
     const updatedGameboard = [...gameboardLogic];
 
     if (gameState === "User Carrier Selection"){
-    // Do something with the clicked cell, for example, update its content
-    // access the cell using gameboardLogic[row][column]
-    updatedGameboard[row][column] = 'C';
+      updatedGameboard[row][column] = 'C';
     } 
     
     else if (gameState === "User Battleship Selection"){
@@ -548,12 +546,7 @@ useEffect(() => {
     }
 
     setGameboardLogic(updatedGameboard);
-  };
-
-
-
-  // create an autoplace function that can be called during initial generation
-  
+  };  
 
   return (
     <div className="grid">
