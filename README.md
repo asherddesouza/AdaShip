@@ -2,9 +2,9 @@
 A reimagined take on the classic game of Battleships.
 
 ## Challenge Outline & Proposed Solution
-AdaShip is a two-player, turn-based game of sea warfare, where you and an opponent first place ships on your respective boards then take it in turns to destroy each other's ships by firing torpedoes every turn. 
+AdaShip is a two-player, turn-based game of sea warfare, where you and an opponent first place ships on your respective boards then take it in turns to destroy each other's ships by firing torpedoes at a space on the board every turn. 
 
-A winner is crowned when they have destroyed all the opponent's ships.
+A winner is crowned when they have destroyed all their opponent's ships.
 
 My implementation of this has been developed using Next.js, which is a React framework that is widely used in industry. The main React-specific features that I used were:
 - Components to compartmentalise the code into distinct sections and 'props' used to pass data between them
@@ -18,12 +18,20 @@ I chose to develop AdaShip in a JavaScript framework because I enjoy developing 
 ### Fig. 1 - A UML-style diagram detailing different components and how they interact at a high-level
 ![image](https://github.com/asherddesouza/AdaShip/assets/77273625/2c618538-cc54-420a-9130-74bcf839a29f)
 
+- Each box represents a file or Component, and the contents of the file detail the variables or States that are initialised
+- The contents of each box are the States or variables that are defined by that specific Component.
+- An arrow with a direction represents the flow of data being used, and an arrow without a direction indicates that the Components are defined within the same file.
+
 ## Working Plan
-I used Git in the command line to make changes to my project, and had two branches, (`main` and `development`)
+I used Git in the command line to make changes to my project, and had two branches, (`main` and `development`). The `main` branch contained the most 'stable' version of the codebase, and the `development` branch contained my proposed changes/additions.
 
-My approach towards development was to work on the project every day that I was able to, and commit my changes to `development` at the end of the day. I also chose to split up my commits into multiple Pull Requests, which meant that commits of a similar nature were grouped together. After a PR had been completed, it was merged into the `main` branch.
+My approach towards development was to work on the project every day that I was able to, and commit my changes to `development` once a sub-feature had been implemented. I also chose to split up my commits into multiple Pull Requests, which meant that commits of a similar nature were grouped together. After a PR had been completed, it was merged into the `main` branch where changes would once again be tested.
 
-To ensure the quality of the project, I ensured to test before and after making major changes. Although I never needed to, because I was committing my changes every day I could have reverted to a previous commit if I ran into an error that couldn't be fixed easily and wasn't present in a previous commit.
+To ensure the quality of the project, I conducted manual regression tests before and after a major commit to ensure that the changes I had made didn't break the game. These regression tests involved:
+- testing all previously implemented behaviour
+- testing the newly added features to see how they interact with previous code
+
+Although I never needed to, because I was committing my changes every day I could have reverted to a previous commit if I ran into an error that couldn't be fixed easily and wasn't present in a previous commit.
 
 ## Task Breakdown
 
@@ -73,15 +81,15 @@ The tasks needed to complete the project were split up into multiple ticketed Pu
 ## Development
 ### Key Features:
 ### Parser
-The parser function was one of the first to be implemented, but it was also soon refactored for usability with config files with slightly different formats.
+The parser function was one of the first to be implemented, but it was soon refactored for usability with config files with slightly different formats.
 
 ![ParserComparison](https://github.com/asherddesouza/AdaShip/assets/77273625/8657bf0a-ff05-44b9-a251-bf8579124b1c)
 As shown above, the initial version relied on taking very specific characters from each line of the config file. Although this worked, it resulted in erratic behaviour if the config file provided was anything other than the standard provided one.
 
 To refactor the function, I used RegEx to filter out non-numerical characters on each line rather than just reading the last characters to get the number. For calculating grid height and width, The line was filtered, halved and then split into grid_width and grid_height variables.
 
-### Player & CPU Grids:
-Both the Player and CPU Grids share some functionality, as detailed below.
+### Player & Target Grids:
+Both the Player and Target Grids share some functionality, as detailed below.
 
 Both grids are generated by reading the **width** and **height** props that are generated in the `page.js` file using the parser function. Each cell is also given a unique 'key' so that it can be identified during gameplay.
 
@@ -89,15 +97,30 @@ They also both share 'AutoPlace' functionality, which does not work in a truly r
 
 ![image](https://github.com/asherddesouza/AdaShip/assets/77273625/efe23e3b-cd86-4114-b617-d94b29dd1b99)
 
-# DISCUSS SHIPMESSAGE ON BOTH
+
+
+
+Both Grids have a **checkShipMessage** method which runs every time the status of a **boatsRemaining** array changes. The variables in the array are set by the ship sizes found in the config file, and they are decremented whenever a hit is recorded by either Grid. Each time the function runs, it checks **boatsRemaining** to see if any boats have dropped to a count of 0 and if they have, another array that holds the destroyed status of different ships is updated (**boatsDestroyed**) and a message is displayed to the user which said `All opponent [specificShip]s destroyed`. 
+
+When first building this, I ran into a bug where once that message was displayed, it would persist until all ships on a board had been destroyed, which wasn't helpful to the user since they no longer had a message saying what type of ship they hit. My workaround to this was to increment **boatsRemaining** by 1 and change the corresponding **boatsDestroyed** entry to true. Once all items **boatsDestroyed** are true, a win or loss message is displayed depending on whose ships were all destroyed.
 
 
 ### Player Grid Specifics
 
-difficulty array
+After the user has completed choosing all their ship positions on the board, placements are checked by evaluating the number of cells used per ship and also ensuring that the ships have been placed either vertically or horizontally. If these conditions aren't met, then an error message appears which the user can click on to restart the game.
+
+![image](https://github.com/asherddesouza/AdaShip/assets/77273625/80893642-9888-427a-9e40-3299cc1378fb)
+
+When it is the CPU's turn to attack, initially the attacks were randomly targeted at any place on the board that hadn't been before. This was fully functional, but it did make the game a bit too easy for the Player since the CPU's attacks were fully random. To rectify this, I modified the `enemyAttackLog` array's initial useState to include 5 cells where the enemy could never attack, which made it slightly more likely for the opponent to hit a user's ship.
+![image](https://github.com/asherddesouza/AdaShip/assets/77273625/8d9c75b6-9dd6-4bfe-9d9a-2810bfc1bb81)
+![board placement optimisations](https://github.com/asherddesouza/AdaShip/assets/77273625/e13159dc-947c-4cf5-85f0-d5d79b4a4dc3)
+
+However, because my method of autoplacing ships means that ships can only go within a certain bound, it means that if the user chose to manually place their ships then there would be a risk that there would be cells on the player grid that the CPU could never attack. This has the side-effect that a user who has chosen to AutoPlace their ships will have a slightly higher chance of losing.
+
 
 ### CPU Grid Specifics
 
+When it's the user's turn to attack, they can select any previously non-selected cell on the target grid. A click handler checks if the cell contained an enemy ship, then a 💣 icon is displayed and a ❌ if not.
 
 ## Evaluation
 
