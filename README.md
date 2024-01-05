@@ -79,6 +79,9 @@ The tasks needed to complete the project were split up into multiple ticketed Pu
 - Added win or loss messages
 - cleaned up unnecessary code
 
+### AS-010: Final Cleanup
+- removing unneeded parts of code
+
 ---
 
 ## Development
