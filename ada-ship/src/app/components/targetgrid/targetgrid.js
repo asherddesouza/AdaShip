@@ -84,7 +84,7 @@ export default function TargetGrid({
   return false
   }
 
-  const shipMessage = () => {
+  const checkShipStatus = () => {
     console.log('boatsRemaining: ', boatsRemaining);
 
     if (boatsRemaining[0] <= 0){
@@ -245,7 +245,7 @@ export default function TargetGrid({
   }, [width, height, gameState]);
 
   useEffect(() => {
-    shipMessage()
+    checkShipStatus()
   }, [boatsRemaining]);
 
 
