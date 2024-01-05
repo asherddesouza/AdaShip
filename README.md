@@ -1,6 +1,9 @@
 # AdaShip
 A reimagined take on the classic game of Battleships.
 
+![image](https://github.com/asherddesouza/AdaShip/assets/77273625/50901eb5-54d1-40b6-a966-fd5fd27ba96f)
+
+
 ## Challenge Outline & Proposed Solution
 AdaShip is a two-player, turn-based game of sea warfare, where you and an opponent first place ships on your respective boards then take it in turns to destroy each other's ships by firing torpedoes at a space on the board every turn. 
 
